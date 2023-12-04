@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "shopee-fe-admin-demo": {
+    "test-xx": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/shopee-fe-admin-demo",
+            "outputPath": "dist/test-xx",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -37,16 +37,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -76,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "shopee-fe-admin-demo:build:production"
+              "buildTarget": "test-xx:build:production"
             },
             "development": {
-              "buildTarget": "shopee-fe-admin-demo:build:development"
+              "buildTarget": "test-xx:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "shopee-fe-admin-demo:build"
+            "buildTarget": "test-xx:build"
           }
         },
         "test": {
@@ -113,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "39cf6330-7fff-4941-8676-f702da87c102"
   }
 }
