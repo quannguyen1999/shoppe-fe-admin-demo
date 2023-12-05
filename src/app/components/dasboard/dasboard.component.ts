@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './dasboard.component.scss'
 })
 export class DasboardComponent {
-
+  chartHeight: string = 'max-width:700px;margin:auto;';
 }

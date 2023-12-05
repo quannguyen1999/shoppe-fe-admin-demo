@@ -10,6 +10,7 @@ import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { LineChartCommonComponent } from './components/charts/line-chart-common/line-chart-common.component';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
+import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-common/dynamic-chart-common.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
     HeaderComponent,
     FooterComponent,
     DasboardComponent,
-    LineChartCommonComponent
+    LineChartCommonComponent,
+    DynamicChartCommonComponent
   ],
   imports: [
     BrowserModule,

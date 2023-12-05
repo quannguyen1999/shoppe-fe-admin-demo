@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
@@ -6,12 +6,18 @@ import { ChartConfiguration, ChartType } from 'chart.js';
   templateUrl: './line-chart-common.component.html',
   styleUrl: './line-chart-common.component.scss'
 })
-export class LineChartCommonComponent {
+export class LineChartCommonComponent implements OnInit{
+
+  @Input() heightChart!: String;
   // private newLabel? = 'New label';
 
   // constructor() {
   //   Chart.register(Annotation);
   // }
+
+  ngOnInit(): void {
+    console.log(this.heightChart)
+  }
 
   public lineChartData: ChartConfiguration['data'] = {
   
