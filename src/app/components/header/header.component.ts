@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
@@ -7,6 +7,10 @@ import { MenuItem, MessageService } from 'primeng/api';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() maxWidth!: string;
+
+
   items: MenuItem[] | undefined;
 
   constructor(private messageService: MessageService) {}

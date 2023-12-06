@@ -1,0 +1,23 @@
+<div class="flex flex-col">
+    <div class="flex flex-row h-14 my-auto w-full">
+        <div class="w-1/3 pt-5 pl-5 text-xs">
+            <span>Weekly Sales</span>
+        </div>
+       <div class="w-2/3 pt-5 pl-2 cursor-pointer">
+            <mat-icon class="text-xs text-gray-400">live_help</mat-icon>
+       </div>
+    </div>
+    <div class="grid grid-flow-row grid-cols-3">
+        <div class="flex flex-col pl-5 col-span-1">
+            <div class="text-xl">
+                <span>{{47 | currency}}K</span>
+            </div>
+            <div>
+                <span class="border-2 border-green-100 border-solid bg-green-100 rounded-full text-xs">+3.5%</span>
+            </div>
+        </div>
+        <div class="col-span-2" >
+            <app-line-chart-common [heightChart]="chartHeight"></app-line-chart-common>
+        </div>
+   </div>
+</div>

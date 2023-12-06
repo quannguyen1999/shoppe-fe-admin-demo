@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dasboard',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './dasboard.component.scss'
 })
 export class DasboardComponent {
+  @Input() maxWidth!: string;
+  
   chartHeight: string = 'max-width:700px;margin:auto;';
 }

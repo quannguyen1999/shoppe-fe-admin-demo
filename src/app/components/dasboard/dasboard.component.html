@@ -1,34 +1,36 @@
-<div class="grid grid-cols-4 grid-flow-col h-40 gap-5 p-2">
-    <div class="border-2 border-solid border-gray-300 rounded-sm">
-
+<div [style]="'max-width:' + maxWidth + ';margin:auto;'">
+    <div class="grid grid-cols-4 grid-flow-col h-40 gap-10 p-2">
+        <div class="border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            <app-weekly-sales-box></app-weekly-sales-box>
+        </div>
+        <div class="border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            
+        </div>
+        <div class="border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            
+        </div>
+        <div class="border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            
+        </div>
     </div>
-    <div class="border-2 border-solid border-gray-300 rounded-sm">
-        
+    <div class="grid grid-cols-2 grid-flow-col h-96 gap-5 p-2">
+        <div class="border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            <app-dynamic-chart-common [heightChart]="chartHeight"></app-dynamic-chart-common>
+          
+        </div>
+        <div class="border-2 border-solid border-gray-200 rounded-sm relative shadow-xl">
+            <app-line-chart-common [heightChart]="chartHeight"></app-line-chart-common>
+        </div>
     </div>
-    <div class="border-2 border-solid border-gray-300 rounded-sm">
-        
-    </div>
-    <div class="border-2 border-solid border-gray-300 rounded-sm">
-        
-    </div>
-</div>
-<div class="grid grid-cols-2 grid-flow-col h-96 gap-5 p-2">
-    <div class="border-2 border-solid border-gray-300 rounded-sm">
-        <app-dynamic-chart-common [heightChart]="chartHeight"></app-dynamic-chart-common>
-      
-    </div>
-    <div class="border-2 border-solid border-gray-300 rounded-sm relative">
-        <app-line-chart-common [heightChart]="chartHeight"></app-line-chart-common>
-    </div>
-</div>
-<div class="grid grid-cols-4 grid-flow-col h-96 gap-5 p-2">
-    <div class="col-span-1 border-2 border-solid border-gray-300 rounded-sm">
-
-    </div>
-    <div class="col-span-2 border-2 border-solid border-gray-300 rounded-sm">
-        
-    </div>
-    <div class="col-span-1 border-2 border-solid border-gray-300 rounded-sm">
-        
+    <div class="grid grid-cols-4 grid-flow-col h-96 gap-5 p-2">
+        <div class="col-span-1 border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+    
+        </div>
+        <div class="col-span-2 border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            
+        </div>
+        <div class="col-span-1 border-2 border-solid border-gray-200 rounded-sm shadow-xl">
+            
+        </div>
     </div>
 </div>

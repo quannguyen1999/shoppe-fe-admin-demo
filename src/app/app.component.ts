@@ -9,5 +9,5 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  {
-  
+  maxWidth: string = '1300px';
 }
