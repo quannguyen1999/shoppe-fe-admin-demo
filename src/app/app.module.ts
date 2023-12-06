@@ -11,6 +11,12 @@ import { LineChartCommonComponent } from './components/charts/line-chart-common/
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
 import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-common/dynamic-chart-common.component';
+import { BarChartCommonComponent } from './components/charts/bar-chart-common/bar-chart-common.component';
+import { MessageService } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { ToastModule } from 'primeng/toast';
+import { BadgeModule } from 'primeng/badge';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +26,7 @@ import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-c
     DasboardComponent,
     LineChartCommonComponent,
     DynamicChartCommonComponent
+    BarChartCommonComponent
   ],
   imports: [
     BrowserModule,
@@ -27,9 +34,13 @@ import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-c
     NgxChartsModule,
     NgChartsModule,
     MatIconModule,
-    InputTextModule
+    InputTextModule,
+    MenuModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    BadgeModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

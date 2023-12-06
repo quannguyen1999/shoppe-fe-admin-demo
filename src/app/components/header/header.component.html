@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="sticky top-0 left-0 w-full h-16 bg-orange-600">
     <div class="flex flex-row h-full m-auto" style="max-width: 1500px;">
         <div class="flex flex-row w-fit px-10 cursor-pointer">
@@ -13,18 +14,31 @@
         <div class="w-4/5 my-auto">
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input type="text" class="pl-10 w-80" pInputText placeholder="Search..."/>
+                <input type="text" class="pl-10 w-80 h-10 border-solid rounded-full" InputText placeholder="Search..."/>
             </span>
         </div>
         <div class="flex flex-row w-fit px-10 text-end h-full leading-5 gap-3">
             <div class="m-auto ">
-                <mat-icon class=" text-white text-xl m-auto">shopping_basket</mat-icon>
+           
+                <mat-icon (click)="menu.toggle($event)" class="text-white text-xl m-auto cursor-pointer">settings</mat-icon>
+                <p-menu #menu [model]="items" [popup]="true"  autoDisplay="false">
+                    <ng-template pTemplate="item" let-item>
+                       <div class="flex flex-row p-auto">
+                            <div [ngClass]="item.icon" class="p-5 w-fit"></div>
+                            <span  class="p-5 w-11/12">{{item.label}}</span>
+                            <div class="pi pi-check p-5 w-fit"></div>
+                       </div>
+                    </ng-template>
+                </p-menu>
             </div>
             <div class="m-auto ">
-                <mat-icon class=" text-white text-xl m-auto">shopping_basket</mat-icon>
+                <mat-icon class=" text-white text-xl m-auto cursor-pointer">notifications</mat-icon>
             </div>
             <div class="m-auto ">
-                <mat-icon class=" text-white text-xl m-auto">shopping_basket</mat-icon>
+                <mat-icon class=" text-white text-xl m-auto cursor-pointer">drag_indicator</mat-icon>
+            </div>
+            <div class="m-auto ">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXjhi7ot7-ltgEN4QBCjxOzBUuidRgMgH3DA&usqp=CAU" class="w-14 cursor-pointer rounded-full" alt="">
             </div>
         </div> 
     </div>
