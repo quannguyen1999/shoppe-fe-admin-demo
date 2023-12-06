@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './weekly-sales-box.component.scss'
 })
 export class WeeklySalesBoxComponent {
-  chartHeight: string = 'max-width:300px;';
+  chartHeight: string = 'width:100%;height:100%;';
 }

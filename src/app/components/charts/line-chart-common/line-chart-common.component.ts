@@ -20,7 +20,6 @@ export class LineChartCommonComponent implements OnInit{
   }
 
   public lineChartData: ChartConfiguration['data'] = {
-  
     datasets: [
       {
         label: '# of Votes',
@@ -66,6 +65,8 @@ export class LineChartCommonComponent implements OnInit{
   };
 
   public lineChartOptions: ChartConfiguration['options'] = {
+    // responsive:true,
+    // maintainAspectRatio: false,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
       y: {

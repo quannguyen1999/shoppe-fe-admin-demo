@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class DasboardComponent {
   @Input() maxWidth!: string;
   
-  chartHeight: string = 'max-width:700px;margin:auto;';
+  chartHeight: string = 'width:100%;height:90%;margin:auto;';
 }
