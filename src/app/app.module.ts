@@ -10,6 +10,13 @@ import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { LineChartCommonComponent } from './components/charts/line-chart-common/line-chart-common.component';
 import { MatIconModule } from '@angular/material/icon';
 import { InputTextModule } from 'primeng/inputtext';
+import { BarChartCommonComponent } from './components/charts/bar-chart-common/bar-chart-common.component';
+import { MessageService } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { ToastModule } from 'primeng/toast';
+import { BadgeModule } from 'primeng/badge';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +24,8 @@ import { InputTextModule } from 'primeng/inputtext';
     HeaderComponent,
     FooterComponent,
     DasboardComponent,
-    LineChartCommonComponent
+    LineChartCommonComponent,
+    BarChartCommonComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +33,13 @@ import { InputTextModule } from 'primeng/inputtext';
     NgxChartsModule,
     NgChartsModule,
     MatIconModule,
-    InputTextModule
+    InputTextModule,
+    MenuModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    BadgeModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
