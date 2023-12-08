@@ -1,7 +1,10 @@
 <p-toast></p-toast>
 <div class="sticky top-0 left-0 w-full h-16 bg-orange-600 z-50">
     <div class="flex flex-row h-full m-auto" [style]="'max-width: ' + maxWidth">
-        <div class="flex flex-row w-fit px-10 cursor-pointer">
+        <div class="py-5 pl-4">
+            <mat-icon (click)="menuOnChange()" class=" m-auto text-white cursor-pointer hover:border-2 hover:border-solid hover:border-orange-400 hover:bg-orange-400 hover:rounded-full hover:text-white">subject</mat-icon>
+        </div>
+        <div class="flex flex-row w-fit px-3 cursor-pointer">
             <div class="my-auto">
                 <mat-icon class=" text-white text-5xl pr-12 pb-14 mt-1">shopping_basket</mat-icon>
             </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
@@ -7,15 +7,22 @@ import { MenuItem, MessageService } from 'primeng/api';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-
+  @Output() menuChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  currentTabMenu!: boolean;
+  
   @Input() maxWidth!: string;
-
 
   items: MenuItem[] | undefined;
 
   constructor(private messageService: MessageService) {}
+
+  menuOnChange(){
+    this.currentTabMenu = !this.currentTabMenu;
+    this.menuChange.emit(this.currentTabMenu);
+  }
   
   ngOnInit() {
+    this.currentTabMenu = true;
     this.items = [
       {
           label: 'Light',
@@ -51,4 +58,8 @@ export class HeaderComponent implements OnInit {
   delete() {
       this.messageService.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
   }
+}
+
+function OutPut(): (target: HeaderComponent, propertyKey: "menuChange") => void {
+  throw new Error('Function not implemented.');
 }

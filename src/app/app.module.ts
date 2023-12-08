@@ -21,6 +21,7 @@ import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-c
 import { TotalOrderBoxComponent } from './components/boxs/total-order-box/total-order-box.component';
 import { WeatherBoxComponent } from './components/boxs/weather-box/weather-box.component';
 import { PieChartCommonComponent } from './components/charts/pie-chart-common/pie-chart-common.component';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PieChartCommonComponent } from './components/charts/pie-chart-common/pi
     WeeklySalesBoxComponent,
     TotalOrderBoxComponent,
     WeatherBoxComponent,
-    PieChartCommonComponent
+    PieChartCommonComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

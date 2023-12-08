@@ -1,3 +1,9 @@
-<app-header [maxWidth]="maxWidth"></app-header>
-<app-dasboard [maxWidth]="maxWidth"></app-dasboard>
+<app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
+<div class="flex flex-row " [style]="'width:'+maxWidth" style="margin: auto;">
+    <div [ngClass]="currentTabMenu ? 'w-min' : ' w-1/5'">
+        <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
+    </div>
+    <app-dasboard [ngClass]="currentTabMenu ? 'w-full ' : 'w-4/5'"></app-dasboard>
+</div>
+
 <app-footer [maxWidth]="maxWidth"></app-footer>
