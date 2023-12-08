@@ -18,6 +18,9 @@ import { BadgeModule } from 'primeng/badge';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WeeklySalesBoxComponent } from './components/boxs/weekly-sales-box/weekly-sales-box.component';
 import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-common/dynamic-chart-common.component';
+import { TotalOrderBoxComponent } from './components/boxs/total-order-box/total-order-box.component';
+import { WeatherBoxComponent } from './components/boxs/weather-box/weather-box.component';
+import { PieChartCommonComponent } from './components/charts/pie-chart-common/pie-chart-common.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { DynamicChartCommonComponent } from './components/charts/dynamic-chart-c
     LineChartCommonComponent,
     DynamicChartCommonComponent,
     BarChartCommonComponent,
-    WeeklySalesBoxComponent
+    WeeklySalesBoxComponent,
+    TotalOrderBoxComponent,
+    WeatherBoxComponent,
+    PieChartCommonComponent
   ],
   imports: [
     BrowserModule,
