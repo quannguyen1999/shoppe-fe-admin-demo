@@ -1,8 +1,26 @@
-<div class="flex flex-row h-full" >
-    <div class="bg-gray-400">fuck</div>
-    <div  class="collapsed-side-bar w-5/6 bg-green-400" [style]="currentTabMenu ? 'width:0px;' : ''">
-        <div class="content-side-bar" [style]="currentTabMenu ? 'opacity: 0;' : ''">
-            <span>fuck this shit</span>
+<div class="flex flex-col h-full collapsed-side-bar text-center text-white bg-orange-300" [style]="currentTabMenu ? 'width:37px;' : 'width:250px;'">
+    <div class="flex flex-row  cursor-pointer bg-orange-700 p-2">
+        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
+            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
+        </div>
+        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
+            Manage Account
+        </div>
+    </div>
+    <div class="flex flex-row bg-orange-600 cursor-pointer hover:bg-orange-700 p-2">
+        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
+            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
+        </div>
+        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
+            Manage Account
+        </div>
+    </div>
+    <div class="flex flex-row bg-orange-600 cursor-pointer hover:bg-orange-700 p-2">
+        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
+            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
+        </div>
+        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
+            Manage Account
         </div>
     </div>
 </div>
