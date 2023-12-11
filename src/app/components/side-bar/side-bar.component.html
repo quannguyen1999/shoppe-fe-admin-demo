@@ -1,26 +1,15 @@
-<div class="flex flex-col h-full collapsed-side-bar text-center text-white bg-orange-300" [style]="currentTabMenu ? 'width:37px;' : 'width:250px;'">
-    <div class="flex flex-row  cursor-pointer bg-orange-700 p-2">
-        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
-            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
+<div class="flex flex-col h-full collapsed-side-bar text-center text-white bg-orange-300 shadow-2xl" 
+    [style]="currentTabMenu == false || (currentTabMenu == true && isHoverTabMenu == true)  ? 'width:250px;' : 'width:37px;'">
+    <div class="flex flex-row  cursor-pointer p-2" (mouseenter)="onHoverMenuEnter()" (mouseleave)="onHoverMenuLeave()" 
+        *ngFor="let item of listMenus" [ngClass]="item.isSelected ? 'bg-orange-700' : 'bg-orange-600 hover:bg-orange-700'"
+        (click)="onClickMenu(item.id)"
+    >   
+        <div class="m-auto" [ngClass]="currentTabMenu == false || (currentTabMenu == true && isHoverTabMenu == true) ? 'w-1/5' : 'w-full'">
+            <mat-icon class="p-auto">{{item.typeIcon}}</mat-icon>
         </div>
-        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
-            Manage Account
-        </div>
-    </div>
-    <div class="flex flex-row bg-orange-600 cursor-pointer hover:bg-orange-700 p-2">
-        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
-            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
-        </div>
-        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
-            Manage Account
-        </div>
-    </div>
-    <div class="flex flex-row bg-orange-600 cursor-pointer hover:bg-orange-700 p-2">
-        <div class="m-auto" [ngClass]="currentTabMenu ? 'w-full' : 'w-1/5'">
-            <mat-icon class="p-auto">supervised_user_circle</mat-icon>
-        </div>
-        <div class="content-side-bar w-5/6 p-2" [style]="currentTabMenu ? 'display: none;' : ''">
-            Manage Account
+        <div class="content-side-bar w-5/6 p-2" 
+        [style]="currentTabMenu == false || (currentTabMenu == true && isHoverTabMenu == true) ? '' : 'display: none;'">
+            {{item.value}}
         </div>
     </div>
 </div>
