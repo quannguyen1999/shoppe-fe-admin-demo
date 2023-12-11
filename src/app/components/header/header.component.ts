@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
@@ -14,7 +15,9 @@ export class HeaderComponent implements OnInit {
 
   items: MenuItem[] | undefined;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService,
+    private router: Router
+    ) {}
 
   menuOnChange(){
     this.currentTabMenu = !this.currentTabMenu;
@@ -58,8 +61,8 @@ export class HeaderComponent implements OnInit {
   delete() {
       this.messageService.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted' });
   }
-}
 
-function OutPut(): (target: HeaderComponent, propertyKey: "menuChange") => void {
-  throw new Error('Function not implemented.');
+  redirectHomePage(){
+    this.router.navigate(['/']);
+  }
 }

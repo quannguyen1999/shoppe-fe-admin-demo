@@ -1,9 +1,9 @@
-<div class="flex flex-col h-full collapsed-side-bar text-center text-white bg-orange-300 shadow-2xl" 
+<div class="h-full flex flex-col collapsed-side-bar text-center text-white bg-orange-300 shadow-2xl" 
     [style]="currentTabMenu == false || (currentTabMenu == true && isHoverTabMenu == true)  ? 'width:250px;' : 'width:37px;'">
     <div class="flex flex-row  cursor-pointer p-2" (mouseenter)="onHoverMenuEnter()" (mouseleave)="onHoverMenuLeave()" 
         *ngFor="let item of listMenus" [ngClass]="item.isSelected ? 'bg-orange-700' : 'bg-orange-600 hover:bg-orange-700'"
         (click)="onClickMenu(item.id)"
-    >   
+    >  
         <div class="m-auto" [ngClass]="currentTabMenu == false || (currentTabMenu == true && isHoverTabMenu == true) ? 'w-1/5' : 'w-full'">
             <mat-icon class="p-auto">{{item.typeIcon}}</mat-icon>
         </div>

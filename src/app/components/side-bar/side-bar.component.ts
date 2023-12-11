@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Input } from '@angular/core';
 import { Menu } from '../../models/menu.model';
 import { listMenus } from '../../constants/menu-value-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -16,6 +17,10 @@ export class SideBarComponent {
 
   isHoverTabMenu!: boolean;
 
+  constructor(private router: Router){
+    
+  }
+
   onHoverMenuEnter(){
     this.isHoverTabMenu = true;
   }
@@ -27,5 +32,7 @@ export class SideBarComponent {
   onClickMenu(menuId: number){
     listMenus.forEach(value => value.isSelected = false)
     listMenus.find(t => t.id === menuId)!.isSelected = true;
+
+    this.router.navigate([`/accounts`]);
   }
 }

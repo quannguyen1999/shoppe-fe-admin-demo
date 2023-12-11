@@ -22,6 +22,9 @@ import { TotalOrderBoxComponent } from './components/boxs/total-order-box/total-
 import { WeatherBoxComponent } from './components/boxs/weather-box/weather-box.component';
 import { PieChartCommonComponent } from './components/charts/pie-chart-common/pie-chart-common.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { AccountsComponent } from './components/accounts/accounts.component';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     TotalOrderBoxComponent,
     WeatherBoxComponent,
     PieChartCommonComponent,
-    SideBarComponent
+    SideBarComponent,
+    AccountsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     MenuModule,
     ToastModule,
     BrowserAnimationsModule,
-    BadgeModule
+    BadgeModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
