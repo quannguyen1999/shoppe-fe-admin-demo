@@ -1,0 +1,38 @@
+<div cdkDropListGroup style="width: 1200px;margin: auto;">
+  
+    <div class="example-container">
+      <h2>Column Hide</h2>
+      <input type="text" 
+        class="w-full border-2
+         border-orange-300 border-solid rounded-full my-2 px-2 shadow-2xl"
+         [formControl]="controlSearchInputHide"
+         >
+      <div
+        cdkDropList
+        [cdkDropListData]="hide"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of hide; track item) {
+          <div class="example-box" cdkDrag>{{item}}</div>
+        }
+      </div>
+    </div>
+  
+    <div class="example-container">
+      <h2>Column Show</h2>
+      <input type="text" 
+      class="w-full border-2
+       border-orange-300 border-solid rounded-full my-2 px-2 shadow-2xl"
+        [formControl]="controlSearchInputShow"
+       >
+      <div
+        cdkDropList
+        [cdkDropListData]="show"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of show; track item) {
+          <div class="example-box" cdkDrag>{{item}}</div>
+        }
+      </div>
+    </div>
+  </div>
