@@ -14,35 +14,36 @@ import { map, startWith } from 'rxjs';
 })
 export class AccountsComponent implements AfterViewInit, OnInit, OnDestroy{
 
-  allColumnHide = ['id']
-  allColumnShow = ['username', 'createdAt', 'updatedAt', 'isActive'];
+  displayedColumns: string[] = ['id', 'username', 'createdAt', 'updatedAt', 'isActive'];
+
+  columnSaveHide: string[] = [];
+  columnSaveShow = this.displayedColumns;
 
   @Input() currentTabMenu!: boolean;
-  
-  displayedColumns: string[] = ['id', 'username', 'createdAt', 'updatedAt', 'isActive'];
 
   dataSource = new MatTableDataSource<Account>(listAccounts);
 
   //drag - drop
-  hide = [...this.allColumnHide];
+  hide = [...this.columnSaveHide];
 
-  show = [...this.allColumnShow];
+  show = [...this.columnSaveShow];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   //search column 
   controlSearchInputHide = new FormControl('');
   controlSearchInputShow = new FormControl('');
+  columnSave: any;
 
   ngOnInit(): void {
     this.controlSearchInputHide.valueChanges.subscribe(value=>
       {
-        this.hide = value === '' ? this.allColumnShow : this.searchValue(value || '');
+        this.hide = value === '' ? this.columnSaveHide : this.searchValue(value || '');
       }
     );
     this.controlSearchInputShow.valueChanges.subscribe(value=>
       {
-        this.show = value === '' ? this.allColumnShow : this.searchValue(value || '');
+        this.show = value === '' ? this.columnSaveShow : this.searchValue(value || '');
       }
     );
   }
@@ -71,6 +72,9 @@ export class AccountsComponent implements AfterViewInit, OnInit, OnDestroy{
         event.previousIndex,
         event.currentIndex,
       );
+
+      this.columnSaveHide = [...this.hide];
+      this.columnSaveShow = [...this.show];
     }
   }
 
