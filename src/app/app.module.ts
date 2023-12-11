@@ -25,6 +25,10 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule} from '@angular/material/table';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ButtonModule } from 'primeng/button';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     BadgeModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DragDropModule,
+    ButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

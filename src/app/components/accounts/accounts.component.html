@@ -1,3 +1,46 @@
+<div cdkDropListGroup style="width: 1200px;margin: auto;">
+  
+  <div class="example-container">
+    <h2>Column Hide</h2>
+    <input type="text" 
+      class="w-full border-2
+       border-orange-300 border-solid rounded-full my-2 px-2 shadow-2xl"
+       [formControl]="controlSearchInputHide"
+       >
+    <div
+      cdkDropList
+      [cdkDropListData]="hide"
+      class="example-list"
+
+      (cdkDropListDropped)="drop($event)">
+      @for (item of hide; track item) {
+        <div class="example-box" cdkDrag>{{item}}</div>
+      }
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Column Show</h2>
+    <input type="text" 
+    class="w-full border-2
+     border-orange-300 border-solid rounded-full my-2 px-2 shadow-2xl"
+      [formControl]="controlSearchInputShow"
+     >
+    <div
+      cdkDropList
+      [cdkDropListData]="show"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of show; track item) {
+        <div class="example-box" cdkDrag>{{item}}</div>
+      }
+    </div>
+  </div>
+</div>
+<div class="w-full">
+  <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2" (click)="onChangeFilterColumn()">Apply</div>
+</div>
+
 <div [style]="'margin:auto;'" class="w-full h-full">
     <div class="mat-elevation-z8 w-fit" style="width: 1200px;margin: 10px;">
         <table mat-table [dataSource]="dataSource">
