@@ -1,7 +1,31 @@
-<app-drag-drop-column [columnSaveShow]="displayedColumns" (allColumnAreShowing)="onColumnShowChange($event)"></app-drag-drop-column>
-<div class="w-full">
-  <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2" (click)="onChangeFilterColumn()">Apply</div>
-</div>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> 
+      <mat-panel-description>
+        Drag and drop column
+        <mat-icon>ballot</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-drag-drop-column [columnSaveShow]="displayedColumns" (allColumnAreShowing)="onColumnShowChange($event)"></app-drag-drop-column>
+    <div class="w-full">
+      <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2" (click)="onChangeFilterColumn()">Apply</div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> 
+      <mat-panel-description>
+        Filters Value
+        <mat-icon>filter_list</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <input type="text" class="bg-gray-500" placeholder="something">
+  </mat-expansion-panel>
+  
+  
+</mat-accordion>
+
+
 
 <div [style]="'margin:auto;'" class="w-full h-full">
     <div class="mat-elevation-z8 w-fit" style="width: 1200px;margin: 10px;">

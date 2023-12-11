@@ -27,8 +27,14 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule} from '@angular/material/table';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ButtonModule } from 'primeng/button';
-
+import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInput, MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropColumnComponent } from './components/drag-drop-column/drag-drop-column.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +50,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     WeatherBoxComponent,
     PieChartCommonComponent,
     SideBarComponent,
-    AccountsComponent
+    AccountsComponent,
+    DragDropColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +69,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DragDropModule,
     ButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatNativeDateModule
+
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
