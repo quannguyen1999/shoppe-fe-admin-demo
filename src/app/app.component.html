@@ -1,6 +1,6 @@
 <app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
 <div class="flex flex-row " [style]="'width:'+maxWidth" style="margin: auto;">
     <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
-    <router-outlet></router-outlet>
+    <router-outlet class="overflow-hidden"></router-outlet>
 </div>
 <app-footer [maxWidth]="maxWidth"></app-footer>
