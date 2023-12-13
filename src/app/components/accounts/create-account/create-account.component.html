@@ -1,0 +1,22 @@
+<div class="bg-orange-300 text-white text-center font-bold text-2xl p-4">
+    <h2>Create new account</h2>
+</div>
+<div class="example-container m-10">
+  
+    <mat-form-field class="w-full">
+      <mat-label>Enter UserName</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="username" required>
+      @if (username.invalid) {
+        <mat-error>{{getErrorMessage()}}</mat-error>
+      }
+    </mat-form-field>
+
+   
+
+    <button class="mb-4 w-full h-10 text-xl text-white leading-5 bg-orange-200 hover:bg-orange-700" (click)="onClear()">
+        Clear
+    </button>
+    <button class="w-full h-10 text-xl text-white leading-5 bg-orange-500 hover:bg-orange-700" (click)="onSubmit()">
+        Submit
+    </button>
+  </div>

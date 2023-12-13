@@ -9,6 +9,7 @@
       </h1>
     </div>
   </div>
+  
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header> 
@@ -18,10 +19,15 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="grid grid-cols-10" >
-        <div class="col-span-3 scroll">
+        <div class="col-span-5 scroll">
+          <div class="col-span-1 border-orange-700 border-solid">
+            <div class="text-center w-5/6 p-1 font-bold bg-orange-400 hover:bg-orange-500 text-white my-2 h-full cursor-pointer">
+              <span>Search</span>
+            </div>
+          </div>
           <h2>Field Search</h2>
+        
           <form class="example-form w-full mt-2 overflow-y-auto" style="min-height:600px;">
-            <!-- avoid space -->
             <mat-form-field class="example-full-width w-5/6 ml-2 hidden" style="display: none;">
               <mat-label>xx</mat-label>
               <input matInput placeholder="Search...">
@@ -66,61 +72,47 @@
             </div>
           </form>
         </div>
-        <div class="col-span-1 border-orange-700 border-solid">
-          <div class="text-center w-5/6 p-1 font-bold bg-orange-400 hover:bg-orange-500 text-white my-2 h-full cursor-pointer">
-            <span>Search</span>
-          </div>
-        </div>
+        
         <div class="col-span-5">
+          <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2" (click)="onChangeFilterColumn()">Apply</div>
           <app-drag-drop-column [columnSaveShow]="displayedColumns" (allColumnAreShowing)="onColumnShowChange($event)"></app-drag-drop-column>
+       
         </div>
-        <div class="col-span-1">
-          <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2 h-full" (click)="onChangeFilterColumn()">Apply</div>
-        </div>
+       
       </div>
     </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header> 
-        <mat-panel-description>
-          Add New Account
-        <mat-icon>filter_list</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-    </mat-expansion-panel>
   </mat-accordion>
-    <div class="mat-elevation-z8 m-auto" style="width: 100%;">
+    <div class="mat-elevation-z8 m-auto overflow-y-auto" style="width: 100%;">
         <table mat-table [dataSource]="dataSource">
-      
           <ng-container *ngFor="let item of displayedColumns" matColumnDef='{{item}}'>
-            <th mat-header-cell *matHeaderCellDef> {{item}} </th>
-            <td mat-cell *matCellDef="let element"> {{element[item]}} </td>
-          </ng-container>
-<!-- 
-          <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef> username. </th>
-            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef> createdAt. </th>
-            <td mat-cell *matCellDef="let element"> {{element.createdAt}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="updatedAt">
-            <th mat-header-cell *matHeaderCellDef> updatedAt. </th>
-            <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="isActive">
-            <th mat-header-cell *matHeaderCellDef> isActive. </th>
-            <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
-          </ng-container> -->
-
-          
+            <div *ngIf="item == 'function'; else notFunction">
+              <th mat-header-cell *matHeaderCellDef><button class="bg-orange-600 p-2 m-2 text-white" (click)="openDialogFormAccount()">Create account</button>
+             </th>
+              <td mat-cell *matCellDef="let element">
+                  <div class="flex flex-row">
+                    <button class="bg-red-600 p-2 m-2 text-white">Delete</button>
+                    <button class="bg-blue-600 p-2 m-2 text-white">Update</button>
+                  </div>
+              </td>
+            </div>
+            <ng-template #notFunction>
+              <th mat-header-cell *matHeaderCellDef> {{item}} </th>
+              <td mat-cell *matCellDef="let element">
+                <div *ngIf="item == 'isActive'; else notInActive">
+                  <mat-slide-toggle [checked]="element[item]"></mat-slide-toggle>
+                </div>
+                <ng-template #notInActive>
+                  {{element[item]}} 
+                </ng-template>
+              </td>
+            </ng-template>
+            
+           
+          </ng-container>          
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[1, 2, 4]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[4]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
  
 </div>
 
