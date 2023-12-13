@@ -27,7 +27,10 @@
           </div>
           <h2>Field Search</h2>
         
-          <form class="example-form w-full mt-2 overflow-y-auto" style="min-height:600px;">
+          <!-- <form class="example-form w-full mt-2 overflow-y-auto" style="min-height:600px;"> -->
+
+            <form class="example-form w-full mt-2 overflow-x-auto" style="max-height: 300px;"> 
+            
             <mat-form-field class="example-full-width w-5/6 ml-2 hidden" style="display: none;">
               <mat-label>xx</mat-label>
               <input matInput placeholder="Search...">
@@ -61,7 +64,7 @@
                 </div>
               </ng-template>
               <ng-template #theThirdCondition>
-                <div class="flex flex-col">
+                <div *ngIf="item != 'Function'" class="flex flex-col">
                   <span class="font-bold text-base leading-5">{{item}}</span>
                   <mat-form-field class="example-full-width w-5/6" >
                     <mat-label>{{item}}</mat-label>

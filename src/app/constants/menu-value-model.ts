@@ -9,23 +9,16 @@ export const listMenus: Array<Menu> = [ {
     },
     {
         id: 2,
-        typeIcon: 'supervised_user_circle',
-        value: 'Manage bitch',
+        typeIcon: 'category',
+        value: 'Manage Category',
         isSelected: false,
         url: 'accounts'
     },
     {
         id: 3,
-        typeIcon: 'supervised_user_circle',
-        value: 'Manage slut',
+        typeIcon: 'keyboard_hide',
+        value: 'Manage Product',
         isSelected: true,
-        url: 'accounts'
-    },
-    {
-        id: 4,
-        typeIcon: 'supervised_user_circle',
-        value: 'Manage catego',
-        isSelected: false,
         url: 'accounts'
     }
 ];

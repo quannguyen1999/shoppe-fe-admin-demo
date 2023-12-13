@@ -4,8 +4,8 @@
 <div class="example-container m-10">
   
     <mat-form-field class="w-full">
-      <mat-label>Enter UserName</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="username" required>
+      <mat-label>UserName</mat-label>
+      <input matInput placeholder="Enter..." [formControl]="username" required>
       @if (username.invalid) {
         <mat-error>{{getErrorMessage()}}</mat-error>
       }
