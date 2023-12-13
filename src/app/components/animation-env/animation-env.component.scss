@@ -2,11 +2,9 @@
     bottom: 15%;
     position: absolute;
     top: 0;
-    -webkit-animation: linear infinite;
-    -webkit-animation-name: run;
-    -webkit-animation-duration: 40s;
+    animation: run linear infinite 40s;
 }
-@-webkit-keyframes run {
+@keyframes run {
 0% {
       left: 0;
     }

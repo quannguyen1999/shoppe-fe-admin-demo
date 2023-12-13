@@ -13,7 +13,7 @@ export const listAccounts: Account[] = [{
         password: 'fuck this',
         createdAt: new Date(),
         updatedAt: new Date(),
-        isActive: true 
+        isActive: false 
     },
     {
         id: 3,

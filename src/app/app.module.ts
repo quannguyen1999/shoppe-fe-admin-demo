@@ -27,9 +27,9 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule} from '@angular/material/table';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ButtonModule } from 'primeng/button';
-import {MatAccordion, MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInput, MatInputModule} from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -37,6 +37,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropColumnComponent } from './components/drag-drop-column/drag-drop-column.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AnimationEnvComponent } from './components/animation-env/animation-env.component';
+import { CreateAccountComponent } from './components/accounts/create-account/create-account.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { AnimationEnvComponent } from './components/animation-env/animation-env.
     SideBarComponent,
     AccountsComponent,
     DragDropColumnComponent,
-    AnimationEnvComponent
+    AnimationEnvComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -79,8 +82,8 @@ import { AnimationEnvComponent } from './components/animation-env/animation-env.
     MatFormFieldModule,
     MatButtonModule,
     MatNativeDateModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
