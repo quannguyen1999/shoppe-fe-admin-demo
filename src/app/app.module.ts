@@ -35,6 +35,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropColumnComponent } from './components/drag-drop-column/drag-drop-column.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { AnimationEnvComponent } from './components/animation-env/animation-env.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { DragDropColumnComponent } from './components/drag-drop-column/drag-drop
     PieChartCommonComponent,
     SideBarComponent,
     AccountsComponent,
-    DragDropColumnComponent
+    DragDropColumnComponent,
+    AnimationEnvComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { DragDropColumnComponent } from './components/drag-drop-column/drag-drop
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSlideToggleModule
 
   ],
   providers: [MessageService],

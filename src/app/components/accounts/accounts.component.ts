@@ -15,6 +15,7 @@ import { map, startWith } from 'rxjs';
 export class AccountsComponent implements AfterViewInit{
 
   displayedColumns: string[] = ['id', 'username', 'createdAt', 'updatedAt', 'isActive'];
+
   dataSource = new MatTableDataSource<Account>(listAccounts);
 
   listColumnShowChange: string[] = [];

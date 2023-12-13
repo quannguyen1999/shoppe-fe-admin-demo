@@ -1,0 +1,24 @@
+#pot {
+    bottom: 15%;
+    position: absolute;
+    top: 0;
+    -webkit-animation: linear infinite;
+    -webkit-animation-name: run;
+    -webkit-animation-duration: 40s;
+}
+@-webkit-keyframes run {
+0% {
+      left: 0;
+    }
+    48% {
+      -webkit-transform: rotateY(0deg); 
+    }
+    50% { 
+      left: calc(100% - 100px);
+    }
+    98% {
+    }
+    100% {
+      left: 0;    
+    }
+}

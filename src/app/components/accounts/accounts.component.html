@@ -1,43 +1,105 @@
 <div [style]="'margin:auto;'" class="w-full h-full">
+  <div class="flex flex-row shadow-2xl p-4">
+    <div class="w-10 border-4 border-solid border-gray-400 ">
+      <mat-icon class="text-2xl ml-1 text-orange-600">supervised_user_circle</mat-icon>
+    </div>
+    <div>
+      <h1 class="font-bold text-2xl text-orange-700 ml-5">
+        Manage Account
+      </h1>
+    </div>
+  </div>
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
+    <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header> 
         <mat-panel-description>
-          Drag and drop column
+          Filter Column
           <mat-icon>ballot</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-drag-drop-column [columnSaveShow]="displayedColumns" (allColumnAreShowing)="onColumnShowChange($event)"></app-drag-drop-column>
-      <div class="w-full">
-        <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2" (click)="onChangeFilterColumn()">Apply</div>
+      <div class="grid grid-cols-10" >
+        <div class="col-span-3 scroll">
+          <h2>Field Search</h2>
+          <form class="example-form w-full mt-2 overflow-y-auto" style="min-height:600px;">
+            <!-- avoid space -->
+            <mat-form-field class="example-full-width w-5/6 ml-2 hidden" style="display: none;">
+              <mat-label>xx</mat-label>
+              <input matInput placeholder="Search...">
+            </mat-form-field> 
+            <div *ngFor="let item of displayedColumns" class="flex flex-col gap-2">
+              <div *ngIf="item == 'createdAt' || item == 'updatedAt'; else theSecondCondition" class="flex flex-col">
+                <span class="font-bold text-base leading-5 mb-2">{{item}}</span>
+                <div class="flex flex-col">
+                  <div>
+                    <mat-form-field color="accent">
+                      <mat-label>Inherited calendar color</mat-label>
+                      <input matInput [matDatepicker]="picker1">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field color="accent">
+                      <mat-label>Custom calendar color</mat-label>
+                      <input matInput [matDatepicker]="picker2">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>  
+              </div>
+              <ng-template #theSecondCondition>
+                <div *ngIf="item == 'isActive'; else theThirdCondition" class="flex flex-row gap-3">
+                  <span class="font-bold text-base leading-5">{{item}}</span>
+                  <mat-slide-toggle></mat-slide-toggle>
+                </div>
+              </ng-template>
+              <ng-template #theThirdCondition>
+                <div class="flex flex-col">
+                  <span class="font-bold text-base leading-5">{{item}}</span>
+                  <mat-form-field class="example-full-width w-5/6" >
+                    <mat-label>{{item}}</mat-label>
+                    <input matInput placeholder="Search...">
+                  </mat-form-field>
+                </div> 
+              </ng-template>
+            </div>
+          </form>
+        </div>
+        <div class="col-span-1 border-orange-700 border-solid">
+          <div class="text-center w-5/6 p-1 font-bold bg-orange-400 hover:bg-orange-500 text-white my-2 h-full cursor-pointer">
+            <span>Search</span>
+          </div>
+        </div>
+        <div class="col-span-5">
+          <app-drag-drop-column [columnSaveShow]="displayedColumns" (allColumnAreShowing)="onColumnShowChange($event)"></app-drag-drop-column>
+        </div>
+        <div class="col-span-1">
+          <div class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2 h-full" (click)="onChangeFilterColumn()">Apply</div>
+        </div>
       </div>
     </mat-expansion-panel>
-  
     <mat-expansion-panel>
       <mat-expansion-panel-header> 
         <mat-panel-description>
-          Filters Value
-          <mat-icon>filter_list</mat-icon>
+          Add New Account
+        <mat-icon>filter_list</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <input type="text" class="bg-gray-500" placeholder="something">
     </mat-expansion-panel>
-    
-    
   </mat-accordion>
-    <div class="mat-elevation-z8 w-11/12 m-auto">
+    <div class="mat-elevation-z8 m-auto" style="width: 100%;">
         <table mat-table [dataSource]="dataSource">
       
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          <ng-container *ngFor="let item of displayedColumns" matColumnDef='{{item}}'>
+            <th mat-header-cell *matHeaderCellDef> {{item}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[item]}} </td>
           </ng-container>
-
+<!-- 
           <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef> username. </th>
             <td mat-cell *matCellDef="let element"> {{element.username}} </td>
           </ng-container>
-
 
           <ng-container matColumnDef="createdAt">
             <th mat-header-cell *matHeaderCellDef> createdAt. </th>
@@ -52,7 +114,7 @@
           <ng-container matColumnDef="isActive">
             <th mat-header-cell *matHeaderCellDef> isActive. </th>
             <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
-          </ng-container>
+          </ng-container> -->
 
           
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
