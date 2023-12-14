@@ -1,23 +1,43 @@
-<div class="flex flex-col">
+<div class="flex flex-col" style="min-width: 300px;">
     <div class="flex flex-row h-14 my-auto w-full">
-        <div class="w-1/3 pt-5 pl-5 text-xs">
+        <div class="w-1/3 pt-5 pl-5 text-xs font-bold">
             <span>Weather</span>
         </div>
        <div class="w-2/3 pt-5 pl-2 cursor-pointer text-end">
             <mat-icon class="text-xs text-gray-400">plus</mat-icon>
        </div>
     </div>
-    <div class="grid grid-flow-row grid-cols-4">
-        <div class="flex flex-col pl-5 col-span-1">
+    <div class="grid grid-flow-row grid-cols-4 gap-1">
+        <div class="flex flex-col pl-2 col-span-1 m-auto" >
             <div class="text-xl">
-                <mat-icon class="text-yellow-300">Sun</mat-icon>
+                <div class="pi pi-fw pi-sun text-5xl text-yellow-400">
+                </div>
             </div>
         </div>
-        <div class="col-span-2 " >
-           s
+        <div class="col-span-2 flex flex-col pr-10" >
+           <div>
+                <span>New York City</span>
+           </div>
+           <div>
+                <span class="text-xs text-red-500">Sunny</span>
+           </div>
+           <div>
+                <span class="text-xs">Precipitation: 50%</span>
+           </div>
         </div>
-        <div class="col-span-1">
-            s
+        <div class="col-span-1 flex flex-col text-center">
+            <div class="h-1/2">
+                <div class="flex flex-row m-auto">
+                    <span class="text-2xl text-blue-600 ml-4">31</span>
+                    <div>
+                        <span class="font-bold text-sm text-blue-600">0</span>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="h-1/2">
+                32 / 25
+            </div>
         </div>
    </div>
 </div>
