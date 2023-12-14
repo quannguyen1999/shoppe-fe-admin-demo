@@ -1,7 +1,8 @@
 <app-animation-env></app-animation-env>
 <app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
-<div class="flex flex-row " [style]="'max-width:'+maxWidth" style="margin: auto;">
+<div class="flex flex-row m-auto" [style]="'max-width:'+maxWidth">
     <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
-    <router-outlet class="overflow-hidden"></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 <app-footer [maxWidth]="maxWidth"></app-footer>
+

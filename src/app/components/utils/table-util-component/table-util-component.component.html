@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8 m-auto overflow-y-auto" style="width: 100%">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container
+        *ngFor="let item of displayedColumns"
+        matColumnDef="{{ item }}"
+      >
+        <div *ngIf="item == 'function'; else notFunction">
+          <th mat-header-cell *matHeaderCellDef>
+            <button
+              class="bg-orange-600 hover:bg-orange-700 p-2 m-2 text-white"
+              (click)="openDialogForm()"
+            >
+              {{contentButton || 'Not Found'}}
+            </button>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="flex flex-row">
+              <button class="bg-red-600 hover:bg-red-700 p-2 m-2 text-white">
+                <mat-icon>delete_sweep</mat-icon>
+              </button>
+              <button class="bg-blue-600 hover:bg-blue-700 p-2 m-2 text-white">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </td>
+        </div>
+        <ng-template #notFunction>
+          <th mat-header-cell *matHeaderCellDef>{{ item }}</th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="item == 'isActive'; else notInActive">
+              <mat-slide-toggle [checked]="element[item]"></mat-slide-toggle>
+            </div>
+            <ng-template #notInActive>
+              {{ element[item] }}
+            </ng-template>
+          </td>
+        </ng-template>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table> 
+    <mat-paginator
+      [pageSizeOptions]="[4]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>

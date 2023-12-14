@@ -39,6 +39,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AnimationEnvComponent } from './components/animation-env/animation-env.component';
 import { CreateAccountComponent } from './components/accounts/create-account/create-account.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { PageNotFoundComponent } from './components/status/page-not-found/page-not-found.component';
+import { CategorysComponent } from './components/categorys/categorys.component';
+import { ProductsComponent } from './components/products/products.component';
+import { TitleComponentComponent } from './components/utils/title-component/title-component.component';
+import { TableUtilComponentComponent } from './components/utils/table-util-component/table-util-component.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     AccountsComponent,
     DragDropColumnComponent,
     AnimationEnvComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    PageNotFoundComponent,
+    CategorysComponent,
+    ProductsComponent,
+    TitleComponentComponent,
+    TableUtilComponentComponent
   ],
   imports: [
     BrowserModule,

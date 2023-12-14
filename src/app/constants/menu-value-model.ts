@@ -12,13 +12,13 @@ export const listMenus: Array<Menu> = [ {
         typeIcon: 'category',
         value: 'Manage Category',
         isSelected: false,
-        url: 'accounts'
+        url: 'categories'
     },
     {
         id: 3,
         typeIcon: 'keyboard_hide',
         value: 'Manage Product',
         isSelected: true,
-        url: 'accounts'
+        url: 'products'
     }
 ];

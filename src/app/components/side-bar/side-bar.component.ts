@@ -31,8 +31,9 @@ export class SideBarComponent {
 
   onClickMenu(menuId: number){
     listMenus.forEach(value => value.isSelected = false)
-    listMenus.find(t => t.id === menuId)!.isSelected = true;
+    let menu =  listMenus.find(t => t.id === menuId);
+    menu!.isSelected = true;
 
-    this.router.navigate([`/accounts`]);
+    this.router.navigate([menu?.url]);
   }
 }

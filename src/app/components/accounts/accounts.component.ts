@@ -15,24 +15,21 @@ import { CreateAccountComponent } from './create-account/create-account.componen
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.scss'
 })
-export class AccountsComponent implements AfterViewInit, OnInit{
+export class AccountsComponent implements OnInit{
 
+  //table
   displayedColumns: string[] = ['id', 'username', 'createdAt', 'updatedAt', 'isActive', 'function'];
-
   dataSource = new MatTableDataSource<Account>(listAccounts);
-
   listColumnShowChange: string[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  //sideBar
   @Input() currentTabMenu!: boolean;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    
+  }
   
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   onColumnShowChange(listValue: string[]){
