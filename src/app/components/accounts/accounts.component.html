@@ -111,6 +111,8 @@
   <app-table-util-component [displayedColumns]="displayedColumns"
     [dataSource]="dataSource"
     (dialogOnChange)="openDialogFormAccount()"
+    (editOnChange)="openEdit($event)"
+    (removeOnChange)="openRemove($event)"
     contentButton="Create New Account"
   >  
   </app-table-util-component>

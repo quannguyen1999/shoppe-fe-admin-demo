@@ -14,6 +14,10 @@ export class TableUtilComponentComponent implements OnInit{
 
   @Output() dialogOnChange: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output() removeOnChange: EventEmitter<string> = new EventEmitter<string>();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   listColumnShowChange: string[] = [];
@@ -29,5 +33,15 @@ export class TableUtilComponentComponent implements OnInit{
   openDialogForm(){
     this.dialogOnChange.emit();
   }
+
+  openEdit(number: string){
+    this.editOnChange.emit(number);
+  }
+
+  openRemove(number: string){
+    this.removeOnChange.emit(number);
+  }
+
+
 
 }

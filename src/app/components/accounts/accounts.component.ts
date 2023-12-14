@@ -44,5 +44,20 @@ export class AccountsComponent implements OnInit{
     this.dialog.open(CreateAccountComponent);
   }
 
+  openEdit(id: string){
+    this.dialog.open(CreateAccountComponent,{
+      data: {
+        id: id
+        // You can add more properties to pass additional data if needed
+      }
+    });
+  }
+
+  openRemove(id: string){
+    console.log(id);
+  }
+
+  
+
 
 }
