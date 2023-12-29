@@ -41,7 +41,11 @@ export class AccountsComponent implements OnInit{
   }
 
   openDialogFormAccount() {
-    this.dialog.open(CreateAccountComponent);
+    const dialogRef = this.dialog.open(CreateAccountComponent);
+    dialogRef.componentInstance.dialogAccountNotification.subscribe(() => {
+      this.dialog.closeAll();
+    })
+
   }
 
   openEdit(id: string){
@@ -55,6 +59,10 @@ export class AccountsComponent implements OnInit{
 
   openRemove(id: string){
     console.log(id);
+  }
+
+  searchData(){
+    
   }
 
   

@@ -1,7 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { listAccounts } from '../../../constants/account-value-model';
+import { AccountServiceService } from '../../../services/account-service.service';
+import { MessageService } from 'primeng/api';
+import { ToastServiceService } from '../../../services/toast-service.service';
+import { Account } from '../../../models/account.model';
 
 @Component({
   selector: 'app-create-account',
@@ -10,19 +14,37 @@ import { listAccounts } from '../../../constants/account-value-model';
 })
 export class CreateAccountComponent implements OnInit{
 
+  accountForm!: FormGroup;
+
   isEdit: boolean = false;
 
-  @Input() username = new FormControl('', [Validators.required, Validators.email]);
+  // @Input() username = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {id: string}){
-    if(this.data !== null){
-      let username = listAccounts.find(t => t.id.toString() == data.id)?.username; 
-      if(data && data.id){
-        this.isEdit = true;
-        this.username.setValue(username || '');
-      }
-    }
+  @Output() dialogAccountNotification: EventEmitter<any> = new EventEmitter();
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: {id: string},
+    private accountService: AccountServiceService,
+    private toastrService: ToastServiceService,
+    private fb: FormBuilder
+  ){
+  
+    this.initForm();
+    // if(this.data !== null){
+    //   let username = listAccounts.find(t => t.id.toString() == data.id)?.username; 
+    //   if(data && data.id){
+    //     this.isEdit = true;
+    //     this.username.setValue(username || '');
+    //   }
+    // }
    
+  }
+
+  initForm(): void {
+    this.accountForm = this.fb.group({
+      id: [null],
+      username:  ['', Validators.required]
+    })
   }
 
   ngOnInit(): void {
@@ -31,18 +53,31 @@ export class CreateAccountComponent implements OnInit{
   
 
   getErrorMessage() {
-    if (this.username.hasError('required')) {
+    if (this.accountForm.get('username')!.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.username.hasError('username') ? 'Not a valid username' : '';
+    return this.accountForm.get('username')!.hasError('username') ? 'Not a valid username' : '';
   }
 
   onClear(){
-    this.username.setValue('');
+    this.accountForm.get('username')!.setValue('');
   } 
 
   onSubmit(){
-    console.log(this.username.value)
+    const formData: Account = this.accountForm.value;
+    this.accountService.createAccount(formData).subscribe(
+      (response) => {
+        this.dialogAccountNotification.emit();
+        this.toastrService.getPopUpSuccess('Account Create Success');
+      }, 
+      (error) => {
+        this.toastrService.getPopUpError(error);
+      }
+    )
+
+    
+
+    
   }
 }

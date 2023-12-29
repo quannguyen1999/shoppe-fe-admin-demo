@@ -44,6 +44,8 @@ import { CategorysComponent } from './components/categorys/categorys.component';
 import { ProductsComponent } from './components/products/products.component';
 import { TitleComponentComponent } from './components/utils/title-component/title-component.component';
 import { TableUtilComponentComponent } from './components/utils/table-util-component/table-util-component.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AccountServiceService } from './services/account-service.service';
 
 @NgModule({
   declarations: [
@@ -93,9 +95,10 @@ import { TableUtilComponentComponent } from './components/utils/table-util-compo
     MatButtonModule,
     MatNativeDateModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, AccountServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
