@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Account } from '../../models/account.model';
 import { listAccounts } from '../../constants/account-value-model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { map, startWith } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/overlay';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { AccountServiceService } from '../../services/account-service.service';
 
 @Component({
   selector: 'app-accounts',
@@ -25,11 +26,15 @@ export class AccountsComponent implements OnInit{
   //sideBar
   @Input() currentTabMenu!: boolean;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    @Inject(AccountServiceService) public accountService: AccountServiceService
+    ) {
     
   }
   
   ngOnInit(): void {
+  
   }
 
   onColumnShowChange(listValue: string[]){
@@ -62,7 +67,10 @@ export class AccountsComponent implements OnInit{
   }
 
   searchData(){
-    
+    this.accountService.getListAccount("0", "4", this.displayedColumns)
+    .subscribe((data) => {
+      console.log(data)
+    })
   }
 
   

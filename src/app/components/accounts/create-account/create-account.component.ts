@@ -24,7 +24,7 @@ export class CreateAccountComponent implements OnInit{
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: string},
-    private accountService: AccountServiceService,
+    @Inject(AccountServiceService) private accountService: AccountServiceService,
     private toastrService: ToastServiceService,
     private fb: FormBuilder
   ){
