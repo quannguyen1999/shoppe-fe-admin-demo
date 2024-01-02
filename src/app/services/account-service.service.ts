@@ -5,38 +5,17 @@ import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { listAccounts } from '../constants/account-value-model';
+import { environment } from '../../environments/environment';
+import { getAccountDetail } from '../constants/graphql-query-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountServiceService {
 
-  getAccountDetail: string = `
-  query AccountDetail($page: Int!, $size: Int!) {
-    listAccount(
-        accountRequestDto: {
-            page: $page,
-            size: $size,
-            username: null,
-            gender: null
-        }
-    ) {
-      page,
-      size,
-      total,
-      data{
-        $fields
-      }
-    }
-  }
-  `;
+  queryRequest: string = getAccountDetail;
 
-  replacements: Record<string, string> = {
-    $test: 'replacementTest',
-    $value: 'replacementValue'
-  };
-
-  private apiUrl = 'http://localhost:8080/accounts/create';
+  private apiUrl = environment.apiUrl + '/accounts/create';
 
   constructor(private http: HttpClient,
               private apollo: Apollo
@@ -51,10 +30,10 @@ export class AccountServiceService {
   getListAccount(page: string, size: string, fields?: string[]): Observable<CommonPageInfo<Account>>{
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";
-    this.getAccountDetail = this.getAccountDetail.replaceAll('$fields', dynamicFields);
+    this.queryRequest = this.queryRequest.replaceAll('$fields', dynamicFields);
     return this.apollo
     .query<{ listAccount: CommonPageInfo<Account> }>({
-      query: gql`${this.getAccountDetail}`, // Using gql tag for template literals
+      query: gql`${this.queryRequest}`, 
       variables: { page, size },
     })
     .pipe(

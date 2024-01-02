@@ -18,8 +18,9 @@ import { AccountServiceService } from '../../services/account-service.service';
 })
 export class AccountsComponent implements OnInit{
   totalPage: number = 0;
-  currentPageDefault: number = 1;
+  currentPageDefault: number = 0;
   currentSizeDefault: number = 2;
+
   //table
   displayedColumns: string[] = ['id', 'username', 'created', 'updated', 'isActive', 'function'];
   dataSource = new MatTableDataSource<Account>();
