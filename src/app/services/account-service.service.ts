@@ -52,7 +52,6 @@ export class AccountServiceService {
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";
     this.getAccountDetail = this.getAccountDetail.replaceAll('$fields', dynamicFields);
-    
     return this.apollo
     .query<{ listAccount: CommonPageInfo<Account> }>({
       query: gql`${this.getAccountDetail}`, // Using gql tag for template literals

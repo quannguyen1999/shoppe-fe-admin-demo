@@ -17,10 +17,10 @@ export class TableUtilComponentComponent implements OnInit{
 
   @Input() totalPage!: number;
 
-  @Input() page!: number;
+  @Input() currentPage!: number;
 
-  @Input() size!: number[];
-
+  @Input() currentSize!: number;
+  
   @Output() dialogOnChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
@@ -56,8 +56,10 @@ export class TableUtilComponentComponent implements OnInit{
   onChangePage(event: any){
     this.searchData.emit({
       page: event.pageIndex,
-      size: event.pageSize,
-    });
+      size: this.currentSize,
+  });
+
+
   }
 
 

@@ -18,9 +18,8 @@ import { AccountServiceService } from '../../services/account-service.service';
 })
 export class AccountsComponent implements OnInit{
   totalPage: number = 0;
-  currentPageDefault: number = 0;
+  currentPageDefault: number = 1;
   currentSizeDefault: number = 2;
-
   //table
   displayedColumns: string[] = ['id', 'username', 'created', 'updated', 'isActive', 'function'];
   dataSource = new MatTableDataSource<Account>();
@@ -61,17 +60,16 @@ export class AccountsComponent implements OnInit{
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = data.page;
-      console.log(data.page)
     })
   }
 
   searchData(){
     this.accountService.getListAccount(this.currentPageDefault.toString(), this.currentSizeDefault.toString(), this.displayedColumns)
     .subscribe((data) => {
+
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = 0;
-      this.currentSizeDefault = 2;
     })
   }
 
