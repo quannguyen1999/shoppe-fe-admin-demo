@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
+import { startWith, switchMap } from 'rxjs';
+import { Account } from '../../../models/account.model';
+import { CommonPageInfo } from '../../../models/common-page.model';
 @Component({
   selector: 'app-table-util-component',
   templateUrl: './table-util-component.component.html',
@@ -12,11 +15,19 @@ export class TableUtilComponentComponent implements OnInit{
 
   @Input() contentButton!: string;
 
+  @Input() totalPage!: number;
+
+  @Input() page!: number;
+
+  @Input() size!: number[];
+
   @Output() dialogOnChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() removeOnChange: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output() searchData: EventEmitter<{ page: number; size: number }> = new EventEmitter<{ page: number; size: number }>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -27,7 +38,7 @@ export class TableUtilComponentComponent implements OnInit{
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
   }
 
   openDialogForm(){
@@ -40,6 +51,13 @@ export class TableUtilComponentComponent implements OnInit{
 
   openRemove(number: string){
     this.removeOnChange.emit(number);
+  }
+
+  onChangePage(event: any){
+    this.searchData.emit({
+      page: event.pageIndex,
+      size: event.pageSize,
+    });
   }
 
 

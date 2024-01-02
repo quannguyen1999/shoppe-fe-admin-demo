@@ -17,10 +17,13 @@ import { AccountServiceService } from '../../services/account-service.service';
   styleUrl: './accounts.component.scss'
 })
 export class AccountsComponent implements OnInit{
+  totalPage: number = 0;
+  currentPageDefault: number = 0;
+  currentSizeDefault: number = 2;
 
   //table
-  displayedColumns: string[] = ['id', 'username', 'createdAt', 'updatedAt', 'isActive', 'function'];
-  dataSource = new MatTableDataSource<Account>(listAccounts);
+  displayedColumns: string[] = ['id', 'username', 'created', 'updated', 'isActive', 'function'];
+  dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
 
   //sideBar
@@ -29,8 +32,8 @@ export class AccountsComponent implements OnInit{
   constructor(
     public dialog: MatDialog,
     @Inject(AccountServiceService) public accountService: AccountServiceService
-    ) {
-    
+  ) {
+    this.searchData();
   }
   
   ngOnInit(): void {
@@ -50,7 +53,26 @@ export class AccountsComponent implements OnInit{
     dialogRef.componentInstance.dialogAccountNotification.subscribe(() => {
       this.dialog.closeAll();
     })
+  }
 
+  pageOnChange(event: any){
+    this.accountService.getListAccount(event.page, event.size, this.displayedColumns)
+    .subscribe((data) => {
+      this.dataSource.data = data.data;
+      this.totalPage = data.total;
+      this.currentPageDefault = data.page;
+      console.log(data.page)
+    })
+  }
+
+  searchData(){
+    this.accountService.getListAccount(this.currentPageDefault.toString(), this.currentSizeDefault.toString(), this.displayedColumns)
+    .subscribe((data) => {
+      this.dataSource.data = data.data;
+      this.totalPage = data.total;
+      this.currentPageDefault = 0;
+      this.currentSizeDefault = 2;
+    })
   }
 
   openEdit(id: string){
@@ -63,15 +85,10 @@ export class AccountsComponent implements OnInit{
   }
 
   openRemove(id: string){
-    console.log(id);
+    // console.log(id);
   }
 
-  searchData(){
-    this.accountService.getListAccount("0", "4", this.displayedColumns)
-    .subscribe((data) => {
-      console.log(data)
-    })
-  }
+
 
   
 

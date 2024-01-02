@@ -111,6 +111,10 @@
   </mat-accordion>
   <app-table-util-component [displayedColumns]="displayedColumns"
     [dataSource]="dataSource"
+    [totalPage]="totalPage"
+    [page]="currentPageDefault"
+    [size]="[currentSizeDefault]"
+    (searchData)="pageOnChange($event)"
     (dialogOnChange)="openDialogFormAccount()"
     (editOnChange)="openEdit($event)"
     (removeOnChange)="openRemove($event)"
