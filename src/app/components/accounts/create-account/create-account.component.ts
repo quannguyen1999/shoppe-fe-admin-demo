@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { listAccounts } from '../../../constants/account-value-model';
+import { listAccounts } from '../../../constants/account-value';
 import { AccountServiceService } from '../../../services/account-service.service';
 import { MessageService } from 'primeng/api';
 import { ToastServiceService } from '../../../services/toast-service.service';
-import { Account } from '../../../models/account.model';
+import { Account, USERNAME } from '../../../models/account.model';
 
 @Component({
   selector: 'app-create-account',
@@ -53,15 +53,15 @@ export class CreateAccountComponent implements OnInit{
   
 
   getErrorMessage() {
-    if (this.accountForm.get('username')!.hasError('required')) {
+    if (this.accountForm.get(USERNAME)!.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.accountForm.get('username')!.hasError('username') ? 'Not a valid username' : '';
+    return this.accountForm.get(USERNAME)!.hasError(USERNAME) ? 'Not a valid username' : '';
   }
 
   onClear(){
-    this.accountForm.get('username')!.setValue('');
+    this.accountForm.get(USERNAME)!.setValue('');
   } 
 
   onSubmit(){

@@ -1,0 +1,1 @@
+export const accountColumns: string[] = ['id', 'username', 'created', 'updated', 'isActive', 'function'];

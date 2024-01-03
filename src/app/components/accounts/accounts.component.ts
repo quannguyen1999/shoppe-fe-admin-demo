@@ -1,15 +1,10 @@
-import { AfterViewInit, Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
-import { listAccounts } from '../../constants/account-value-model';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ComponentType } from '@angular/cdk/overlay';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AccountServiceService } from '../../services/account-service.service';
+import { accountColumns } from '../../constants/column-value';
 
 @Component({
   selector: 'app-accounts',
@@ -22,7 +17,7 @@ export class AccountsComponent implements OnInit{
   currentSizeDefault: number = 2;
 
   //table
-  displayedColumns: string[] = ['id', 'username', 'created', 'updated', 'isActive', 'function'];
+  displayedColumns: string[] = accountColumns;
   dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
 
@@ -65,9 +60,8 @@ export class AccountsComponent implements OnInit{
   }
 
   searchData(){
-    this.accountService.getListAccount(this.currentPageDefault.toString(), this.currentSizeDefault.toString(), this.displayedColumns)
+    this.accountService.getListAccount(this.currentPageDefault, this.currentSizeDefault, this.displayedColumns)
     .subscribe((data) => {
-
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = 0;

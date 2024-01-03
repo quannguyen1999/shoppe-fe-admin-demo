@@ -46,7 +46,7 @@ import { TitleComponentComponent } from './components/utils/title-component/titl
 import { TableUtilComponentComponent } from './components/utils/table-util-component/table-util-component.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountServiceService } from './services/account-service.service';
-import { GraphQLModule } from './graphql.module';
+import { GraphQLModule } from './config/graphql.module';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,1 @@
+export const ACCOUNT_USER_NAME_INVALID: string = '';
