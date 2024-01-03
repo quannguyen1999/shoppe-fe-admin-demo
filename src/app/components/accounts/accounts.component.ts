@@ -60,6 +60,7 @@ export class AccountsComponent implements OnInit{
   }
 
   searchData(){
+    console.log("it work bitch")
     this.accountService.getListAccount(this.currentPageDefault, this.currentSizeDefault, this.displayedColumns)
     .subscribe((data) => {
       this.dataSource.data = data.data;

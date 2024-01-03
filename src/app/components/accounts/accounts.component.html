@@ -115,6 +115,7 @@
     [currentPage]="currentPageDefault"
     [currentSize]="currentSizeDefault"
     (searchData)="pageOnChange($event)"
+    (onChangeDataEmit)="searchData()"
     (dialogOnChange)="openDialogFormAccount()"
     (editOnChange)="openEdit($event)"
     (removeOnChange)="openRemove($event)"

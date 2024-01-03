@@ -29,6 +29,8 @@ export class TableUtilComponentComponent implements OnInit{
 
   @Output() searchData: EventEmitter<{ page: number; size: number }> = new EventEmitter<{ page: number; size: number }>();
 
+  @Output() onChangeDataEmit: EventEmitter<string> = new EventEmitter<string>();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   listColumnShowChange: string[] = [];
@@ -55,11 +57,13 @@ export class TableUtilComponentComponent implements OnInit{
 
   onChangePage(event: any){
     this.searchData.emit({
-      page: event.pageIndex,
-      size: this.currentSize,
-  });
+        page: event.pageIndex,
+        size: this.currentSize,
+    });
+  }
 
-
+  onChangeData(){
+    this.onChangeDataEmit.emit('');
   }
 
 

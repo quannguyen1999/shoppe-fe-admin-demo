@@ -12,6 +12,14 @@
             >
               {{contentButton || 'Not Found'}}
             </button>
+
+            <button
+            class="bg-orange-600 hover:bg-orange-700 p-2 m-2 text-white"
+            (click)="onChangeData()"
+          >
+            Search
+          </button>
+
           </th>
           <td mat-cell *matCellDef="let element">
             <div class="flex flex-row">
