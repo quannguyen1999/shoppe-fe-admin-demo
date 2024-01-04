@@ -177,16 +177,16 @@
       </mat-expansion-panel-header>
       <div class="grid grid-rows-1">
         <div class="row-span-1">
+          <app-drag-drop-column
+            [columnSaveShow]="displayedColumns"
+            (allColumnAreShowing)="onColumnShowChange($event)"
+          ></app-drag-drop-column>
           <div
             class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2"
             (click)="onChangeFilterColumn()"
           >
             Apply
           </div>
-          <app-drag-drop-column
-            [columnSaveShow]="displayedColumns"
-            (allColumnAreShowing)="onColumnShowChange($event)"
-          ></app-drag-drop-column>
         </div>
       </div>
     </mat-expansion-panel>
@@ -194,7 +194,7 @@
   <div class="w-full h-12 border-2 shadow-sm bg-white my-2">
     <div class="flex flex-row justify-end gap-4">
       <div>
-        <button class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+        <button class="bg-orange-600 hover:bg-orange-700 text-white p-2" (click)="exportExcel()">
           Export File
         </button>
       </div>
@@ -207,7 +207,10 @@
         </button>
       </div>
       <div>
-        <button class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+        <button
+          class="bg-orange-600 hover:bg-orange-700 text-white p-2"
+          (click)="searchData()"
+        >
           Search
         </button>
       </div>

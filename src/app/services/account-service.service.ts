@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account, AccountRequestModel } from '../models/account.model';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
-import { listAccounts } from '../constants/account-value';
 import { environment } from '../../environments/environment';
 import { getAccountDetail } from '../constants/graphql-query-model';
-import { ACCOUNT_CREATE } from '../constants/api-value';
+import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
 
 @Injectable({
   providedIn: 'root'
@@ -26,25 +25,25 @@ export class AccountServiceService {
   }
 
   getListAccount(page: number, size: number, fields?: string[], accountRequestModel?: AccountRequestModel): Observable<CommonPageInfo<Account>>{
+    let query = this.queryRequest;
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";
-    this.queryRequest = this.queryRequest.replaceAll('$fields', dynamicFields);
+    query = query.replaceAll('$fields', dynamicFields);
     return this.apollo
     .query<{ listAccount: CommonPageInfo<Account> }>({
-      query: gql`${this.queryRequest}`, 
+      query: gql`${query}`, 
       variables: { 
         page: page, 
         size: size, 
         id: accountRequestModel?.id,
         username: accountRequestModel?.username,
         fromBirthday: this.formatDateToYYYYMMDD(accountRequestModel?.fromBirthday),
-        toBirthday: this.formatDateToYYYYMMDD(accountRequestModel!.toBirthday),
+        toBirthday: this.formatDateToYYYYMMDD(accountRequestModel?.toBirthday),
         createFromDate: this.formatDateToYYYYMMDD(accountRequestModel?.createFromDate),
         createToDate: this.formatDateToYYYYMMDD(accountRequestModel?.createToDate),
         isActive: accountRequestModel?.isActive,
         gender: accountRequestModel?.gender,
         email: accountRequestModel?.email
-
       },
     })
     .pipe(
@@ -52,7 +51,14 @@ export class AccountServiceService {
     );
   }
 
-   formatDateToYYYYMMDD(date: Date | null | undefined): string | undefined | null{
+  exportExcel(accountRequestModel: AccountRequestModel): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(ACCOUNT_EXPORT, { accountRequestModel }, { headers, responseType: 'blob' });
+  }
+
+  formatDateToYYYYMMDD(date: Date | null | undefined): string | undefined | null{
     if(date === null){
       return null;
     }

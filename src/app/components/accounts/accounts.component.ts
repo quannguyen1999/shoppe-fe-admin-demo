@@ -74,12 +74,28 @@ export class AccountsComponent implements OnInit{
     this.searchAccount(this.currentPageDefault, this.currentSizeDefault, true);
   }
 
+  exportExcel(){
+    this.accountService.exportExcel(this.accountRequestModel).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'exportedData.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
   searchAccount(page: number, size: number, isRestPage: boolean){
     this.isLoadingPage = true;
+    
+    //reset page
     this.dataSource.data = [];
     this.totalPage = 0;
     this.currentPageDefault = 0;
-    
+
+    //seatch page
     this.accountService.getListAccount(page, size, this.displayedColumns, this.accountRequestModel)
     .subscribe((data) => {
       this.isLoadingPage = false;
