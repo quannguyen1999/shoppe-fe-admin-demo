@@ -16,6 +16,9 @@ export class AccountsComponent implements OnInit{
   currentPageDefault: number = 0;
   currentSizeDefault: number = 2;
 
+  //
+  isLoadingPage: boolean = false;
+
   //Field To Search
   accountRequestModel: AccountRequestModel = {
     id: '',
@@ -72,8 +75,14 @@ export class AccountsComponent implements OnInit{
   }
 
   searchAccount(page: number, size: number, isRestPage: boolean){
+    this.isLoadingPage = true;
+    this.dataSource.data = [];
+    this.totalPage = 0;
+    this.currentPageDefault = 0;
+    
     this.accountService.getListAccount(page, size, this.displayedColumns, this.accountRequestModel)
     .subscribe((data) => {
+      this.isLoadingPage = false;
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = isRestPage ? 0 : data.page;

@@ -47,6 +47,7 @@ import { TableUtilComponentComponent } from './components/utils/table-util-compo
 import { HttpClientModule } from '@angular/common/http';
 import { AccountServiceService } from './services/account-service.service';
 import { GraphQLModule } from './config/graphql.module';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { GraphQLModule } from './config/graphql.module';
     MatSlideToggleModule,
     MatDialogModule,
     HttpClientModule,
-    GraphQLModule
+    GraphQLModule,
+    ProgressSpinnerModule
   ],
   providers: [MessageService, AccountServiceService],
   bootstrap: [AppComponent]

@@ -12,7 +12,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="grid grid-rows-1">
-        <div class="row-span-1 scroll ">
+        <div class="row-span-1 scroll">
           <h2>Field Search</h2>
           <!-- FORM -->
           <form
@@ -32,8 +32,7 @@
               *ngFor="let item of displayedColumns"
               class="flex flex-col gap-2"
             >
-            
-            <!-- USERNAME -->
+              <!-- USERNAME -->
               <mat-form-field
                 class="example-full-width w-5/6"
                 *ngIf="item == 'username'"
@@ -193,27 +192,26 @@
     </mat-expansion-panel>
   </mat-accordion>
   <div class="w-full h-12 border-2 shadow-sm bg-white my-2">
-      <div class="flex flex-row justify-end gap-4">
-        <div>
-          <button
-          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
-            Export File
-          </button>
-        </div>
-        <div>
-          <button (click)="openDialogFormAccount()"
-          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
-            Create New Account
-          </button>
-        </div>
-        <div>
-          <button
-          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
-            Search
-          </button>
-        </div>
-        
+    <div class="flex flex-row justify-end gap-4">
+      <div>
+        <button class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+          Export File
+        </button>
       </div>
+      <div>
+        <button
+          (click)="openDialogFormAccount()"
+          class="bg-orange-600 hover:bg-orange-700 text-white p-2"
+        >
+          Create New Account
+        </button>
+      </div>
+      <div>
+        <button class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+          Search
+        </button>
+      </div>
+    </div>
   </div>
   <app-table-util-component
     [displayedColumns]="displayedColumns"
@@ -221,6 +219,7 @@
     [totalPage]="totalPage"
     [currentPage]="currentPageDefault"
     [currentSize]="currentSizeDefault"
+    [isLoadingPage]="isLoadingPage"
     (searchData)="pageOnChange($event)"
     (editOnChange)="openEdit($event)"
     (removeOnChange)="openRemove($event)"

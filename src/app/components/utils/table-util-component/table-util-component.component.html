@@ -34,7 +34,16 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow >
+        <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length" *ngIf="!isLoadingPage">
+          <h3 class="text-center font-bold">No Data</h3>
+        </td>
+      </tr>
     </table> 
+    <div class="text-center" *ngIf="isLoadingPage">
+      <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    </div>
+    
     <mat-paginator
       [pageIndex]="currentPage"
       [length]="totalPage"
