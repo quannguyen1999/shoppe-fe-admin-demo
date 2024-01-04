@@ -20,16 +20,12 @@ export class TableUtilComponentComponent implements OnInit{
   @Input() currentPage!: number;
 
   @Input() currentSize!: number;
-  
-  @Output() dialogOnChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() removeOnChange: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() searchData: EventEmitter<{ page: number; size: number }> = new EventEmitter<{ page: number; size: number }>();
-
-  @Output() onChangeDataEmit: EventEmitter<string> = new EventEmitter<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -41,10 +37,6 @@ export class TableUtilComponentComponent implements OnInit{
 
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
-  }
-
-  openDialogForm(){
-    this.dialogOnChange.emit();
   }
 
   openEdit(number: string){
@@ -61,11 +53,5 @@ export class TableUtilComponentComponent implements OnInit{
         size: this.currentSize,
     });
   }
-
-  onChangeData(){
-    this.onChangeDataEmit.emit('');
-  }
-
-
 
 }

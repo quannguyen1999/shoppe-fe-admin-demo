@@ -7,23 +7,16 @@
     <mat-expansion-panel expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-description>
-          Filter Column
+          Search Column
           <mat-icon>ballot</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="grid grid-cols-10">
-        <div class="col-span-5 scroll max-w-6xl">
-          <div class="col-span-1 border-orange-700 border-solid">
-            <div
-              class="text-center w-5/6 p-1 font-bold bg-orange-400 hover:bg-orange-500 text-white my-2 h-full cursor-pointer"
-              (click)="searchData()"
-            >
-              <span>Search</span>
-            </div>
-          </div>
+      <div class="grid grid-rows-1">
+        <div class="row-span-1 scroll ">
           <h2>Field Search</h2>
+          <!-- FORM -->
           <form
-            class="example-form w-full mt-2 overflow-x-auto"
+            class="example-form w-max mt-2 overflow-x-auto"
             style="max-height: 300px"
           >
             <!-- avoid css  -->
@@ -39,7 +32,8 @@
               *ngFor="let item of displayedColumns"
               class="flex flex-col gap-2"
             >
-              <!-- <span class="font-bold text-base leading-5">{{ item }}</span> -->
+            
+            <!-- USERNAME -->
               <mat-form-field
                 class="example-full-width w-5/6"
                 *ngIf="item == 'username'"
@@ -50,9 +44,11 @@
                   placeholder="Search..."
                   [(ngModel)]="accountRequestModel.username"
                   name="{{ item }}"
+                  (keyup.enter)="searchData()"
                 />
               </mat-form-field>
 
+              <!-- ID -->
               <mat-form-field
                 class="example-full-width w-5/6"
                 *ngIf="item == 'id'"
@@ -63,9 +59,26 @@
                   placeholder="Search..."
                   [(ngModel)]="accountRequestModel.id"
                   name="{{ item }}"
+                  (keyup.enter)="searchData()"
                 />
               </mat-form-field>
 
+              <!-- EMAIL -->
+              <mat-form-field
+                class="example-full-width w-5/6"
+                *ngIf="item == 'email'"
+              >
+                <mat-label>{{ item }}</mat-label>
+                <input
+                  matInput
+                  placeholder="Search..."
+                  [(ngModel)]="accountRequestModel.email"
+                  name="{{ item }}"
+                  (keyup.enter)="searchData()"
+                />
+              </mat-form-field>
+
+              <!-- IS ACTIVE -->
               <div *ngIf="item == 'isActive'" class="flex flex-row gap-3">
                 <span class="text-base leading-5">Is Active User: </span>
                 <mat-slide-toggle
@@ -74,20 +87,21 @@
                 ></mat-slide-toggle>
               </div>
 
-              <div
-                *ngIf="item == 'created'"
-                class="flex flex-col"
-              >
-
+              <!-- CREATED -->
+              <div *ngIf="item == 'created'" class="flex flex-col">
                 <div class="flex flex-row">
                   <div>
                     <mat-form-field color="accent" class="customDateInput">
                       <mat-label>Create From Date</mat-label>
-                      <input matInput [matDatepicker]="picker1"  [(ngModel)]="accountRequestModel.createFromDate" name="{{item}}"/>
+                      <input
+                        matInput
+                        [matDatepicker]="picker1"
+                        [(ngModel)]="accountRequestModel.createFromDate"
+                        name="{{ item }}"
+                      />
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker1"
-                      
                       ></mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
@@ -96,7 +110,12 @@
                   <div>
                     <mat-form-field color="accent" class="customDateInput">
                       <mat-label>Create To Date</mat-label>
-                      <input matInput [matDatepicker]="picker2" [(ngModel)]="accountRequestModel.createToDate" name="{{item}}"/>
+                      <input
+                        matInput
+                        [matDatepicker]="picker2"
+                        [(ngModel)]="accountRequestModel.createToDate"
+                        name="{{ item }}"
+                      />
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker2"
@@ -107,20 +126,21 @@
                 </div>
               </div>
 
-              <div
-                *ngIf="item == 'birthday'"
-                class="flex flex-col"
-              >
-
+              <!-- BIRTHDAY -->
+              <div *ngIf="item == 'birthday'" class="flex flex-col">
                 <div class="flex flex-row">
                   <div>
                     <mat-form-field color="accent" class="customDateInput">
                       <mat-label>Birthday From Date</mat-label>
-                      <input matInput [matDatepicker]="picker1"  [(ngModel)]="accountRequestModel.fromBirthday" name="{{item}}"/>
+                      <input
+                        matInput
+                        [matDatepicker]="picker1"
+                        [(ngModel)]="accountRequestModel.fromBirthday"
+                        name="{{ item }}"
+                      />
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker1"
-                      
                       ></mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
@@ -129,7 +149,12 @@
                   <div>
                     <mat-form-field color="accent" class="customDateInput">
                       <mat-label>Birthday To Date</mat-label>
-                      <input matInput [matDatepicker]="picker2" [(ngModel)]="accountRequestModel.toBirthday" name="{{item}}"/>
+                      <input
+                        matInput
+                        [matDatepicker]="picker2"
+                        [(ngModel)]="accountRequestModel.toBirthday"
+                        name="{{ item }}"
+                      />
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker2"
@@ -142,7 +167,17 @@
             </div>
           </form>
         </div>
-        <div class="col-span-5">
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel expanded="false">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          Filter Column
+          <mat-icon>ballot</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="grid grid-rows-1">
+        <div class="row-span-1">
           <div
             class="text-center w-full p-1 bg-orange-400 hover:bg-orange-500 text-white my-2"
             (click)="onChangeFilterColumn()"
@@ -157,6 +192,29 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+  <div class="w-full h-12 border-2 shadow-sm bg-white my-2">
+      <div class="flex flex-row justify-end gap-4">
+        <div>
+          <button
+          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+            Export File
+          </button>
+        </div>
+        <div>
+          <button (click)="openDialogFormAccount()"
+          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+            Create New Account
+          </button>
+        </div>
+        <div>
+          <button
+          class="bg-orange-600 hover:bg-orange-700 text-white p-2">
+            Search
+          </button>
+        </div>
+        
+      </div>
+  </div>
   <app-table-util-component
     [displayedColumns]="displayedColumns"
     [dataSource]="dataSource"
@@ -164,11 +222,8 @@
     [currentPage]="currentPageDefault"
     [currentSize]="currentSizeDefault"
     (searchData)="pageOnChange($event)"
-    (onChangeDataEmit)="searchData()"
-    (dialogOnChange)="openDialogFormAccount()"
     (editOnChange)="openEdit($event)"
     (removeOnChange)="openRemove($event)"
-    contentButton="Create New Account"
   >
   </app-table-util-component>
 </div>

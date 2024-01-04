@@ -9,13 +9,14 @@ export interface Account {
 
 export interface AccountRequestModel {
     id: string,
-    username: string,
+    username: string | null,
     createFromDate: Date | null,
     createToDate: Date | null,
     isActive: boolean | true,
     fromBirthday: Date | null,
     toBirthday: Date | null,
-    gender: boolean | null
+    gender: boolean | null,
+    email: string | null
 }
 
 export const ID: string = 'id';

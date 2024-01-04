@@ -42,7 +42,9 @@ export class AccountServiceService {
         createFromDate: this.formatDateToYYYYMMDD(accountRequestModel?.createFromDate),
         createToDate: this.formatDateToYYYYMMDD(accountRequestModel?.createToDate),
         isActive: accountRequestModel?.isActive,
-        gender: accountRequestModel?.gender
+        gender: accountRequestModel?.gender,
+        email: accountRequestModel?.email
+
       },
     })
     .pipe(

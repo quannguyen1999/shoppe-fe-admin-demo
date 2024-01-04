@@ -6,19 +6,7 @@
       >
         <div *ngIf="item == 'function'; else notFunction">
           <th mat-header-cell *matHeaderCellDef>
-            <button
-              class="bg-blue-600 hover:bg-blue-700 p-2 m-2 text-white"
-              (click)="openDialogForm()"
-            >
-              {{contentButton || 'Not Found'}}
-            </button>
-
-            <button
-            class="bg-orange-600 hover:bg-orange-700 p-2 m-2 text-white"
-            (click)="onChangeData()"
-          >
-            Search
-          </button>
+        Function
 
           </th>
           <td mat-cell *matCellDef="let element">

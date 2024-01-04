@@ -25,7 +25,8 @@ export class AccountsComponent implements OnInit{
     isActive: true,
     fromBirthday: null,
     toBirthday: null,
-    gender: null
+    gender: null,
+    email: null
   };
 
   //Table
