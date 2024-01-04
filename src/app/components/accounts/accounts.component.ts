@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { Account } from '../../models/account.model';
+import { Account, AccountRequestModel } from '../../models/account.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -16,12 +16,24 @@ export class AccountsComponent implements OnInit{
   currentPageDefault: number = 0;
   currentSizeDefault: number = 2;
 
-  //table
+  //Field To Search
+  accountRequestModel: AccountRequestModel = {
+    id: '',
+    username: '',
+    createFromDate: null,
+    createToDate: null,
+    isActive: true,
+    fromBirthday: null,
+    toBirthday: null,
+    gender: null
+  };
+
+  //Table
   displayedColumns: string[] = accountColumns;
   dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
 
-  //sideBar
+  //SideBar
   @Input() currentTabMenu!: boolean;
 
   constructor(
@@ -51,21 +63,19 @@ export class AccountsComponent implements OnInit{
   }
 
   pageOnChange(event: any){
-    this.accountService.getListAccount(event.page, event.size, this.displayedColumns)
-    .subscribe((data) => {
-      this.dataSource.data = data.data;
-      this.totalPage = data.total;
-      this.currentPageDefault = data.page;
-    })
+    this.searchAccount(event.page, event.size, false);
   }
 
   searchData(){
-    console.log("it work bitch")
-    this.accountService.getListAccount(this.currentPageDefault, this.currentSizeDefault, this.displayedColumns)
+    this.searchAccount(this.currentPageDefault, this.currentSizeDefault, true);
+  }
+
+  searchAccount(page: number, size: number, isRestPage: boolean){
+    this.accountService.getListAccount(page, size, this.displayedColumns, this.accountRequestModel)
     .subscribe((data) => {
       this.dataSource.data = data.data;
       this.totalPage = data.total;
-      this.currentPageDefault = 0;
+      this.currentPageDefault = isRestPage ? 0 : data.page;
     })
   }
 

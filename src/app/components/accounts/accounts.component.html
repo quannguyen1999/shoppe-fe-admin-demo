@@ -12,12 +12,12 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="grid grid-cols-10">
-        <div class="col-span-5 scroll">
+        <div class="col-span-5 scroll max-w-6xl">
           <div class="col-span-1 border-orange-700 border-solid">
             <div
               class="text-center w-5/6 p-1 font-bold bg-orange-400 hover:bg-orange-500 text-white my-2 h-full cursor-pointer"
               (click)="searchData()"
-              >
+            >
               <span>Search</span>
             </div>
           </div>
@@ -31,39 +31,72 @@
               class="example-full-width w-5/6 ml-2 hidden"
               style="display: none"
             >
-              <mat-label>xx</mat-label>
+              <mat-label>Fake</mat-label>
               <input matInput placeholder="Search..." />
             </mat-form-field>
+
             <div
               *ngFor="let item of displayedColumns"
               class="flex flex-col gap-2"
             >
+              <!-- <span class="font-bold text-base leading-5">{{ item }}</span> -->
+              <mat-form-field
+                class="example-full-width w-5/6"
+                *ngIf="item == 'username'"
+              >
+                <mat-label>{{ item }}</mat-label>
+                <input
+                  matInput
+                  placeholder="Search..."
+                  [(ngModel)]="accountRequestModel.username"
+                  name="{{ item }}"
+                />
+              </mat-form-field>
+
+              <mat-form-field
+                class="example-full-width w-5/6"
+                *ngIf="item == 'id'"
+              >
+                <mat-label>{{ item }}</mat-label>
+                <input
+                  matInput
+                  placeholder="Search..."
+                  [(ngModel)]="accountRequestModel.id"
+                  name="{{ item }}"
+                />
+              </mat-form-field>
+
+              <div *ngIf="item == 'isActive'" class="flex flex-row gap-3">
+                <span class="text-base leading-5">Is Active User: </span>
+                <mat-slide-toggle
+                  [(ngModel)]="accountRequestModel.isActive"
+                  name="{{ item }}"
+                ></mat-slide-toggle>
+              </div>
+
               <div
-                *ngIf="
-                  item == 'createdAt' || item == 'updatedAt';
-                  else theSecondCondition
-                "
+                *ngIf="item == 'created'"
                 class="flex flex-col"
               >
-                <span class="font-bold text-base leading-5 mb-2">{{
-                  item
-                }}</span>
-                <div class="flex flex-col">
+
+                <div class="flex flex-row">
                   <div>
-                    <mat-form-field color="accent">
-                      <mat-label>Inherited calendar color</mat-label>
-                      <input matInput [matDatepicker]="picker1" />
+                    <mat-form-field color="accent" class="customDateInput">
+                      <mat-label>Create From Date</mat-label>
+                      <input matInput [matDatepicker]="picker1"  [(ngModel)]="accountRequestModel.createFromDate" name="{{item}}"/>
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker1"
+                      
                       ></mat-datepicker-toggle>
                       <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
                   </div>
+                  -
                   <div>
-                    <mat-form-field color="accent">
-                      <mat-label>Custom calendar color</mat-label>
-                      <input matInput [matDatepicker]="picker2" />
+                    <mat-form-field color="accent" class="customDateInput">
+                      <mat-label>Create To Date</mat-label>
+                      <input matInput [matDatepicker]="picker2" [(ngModel)]="accountRequestModel.createToDate" name="{{item}}"/>
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker2"
@@ -73,24 +106,39 @@
                   </div>
                 </div>
               </div>
-              <ng-template #theSecondCondition>
-                <div
-                  *ngIf="item == 'isActive'; else theThirdCondition"
-                  class="flex flex-row gap-3"
-                >
-                  <span class="font-bold text-base leading-5">{{ item }}</span>
-                  <mat-slide-toggle></mat-slide-toggle>
+
+              <div
+                *ngIf="item == 'birthday'"
+                class="flex flex-col"
+              >
+
+                <div class="flex flex-row">
+                  <div>
+                    <mat-form-field color="accent" class="customDateInput">
+                      <mat-label>Birthday From Date</mat-label>
+                      <input matInput [matDatepicker]="picker1"  [(ngModel)]="accountRequestModel.fromBirthday" name="{{item}}"/>
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="picker1"
+                      
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  -
+                  <div>
+                    <mat-form-field color="accent" class="customDateInput">
+                      <mat-label>Birthday To Date</mat-label>
+                      <input matInput [matDatepicker]="picker2" [(ngModel)]="accountRequestModel.toBirthday" name="{{item}}"/>
+                      <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="picker2"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
                 </div>
-              </ng-template>
-              <ng-template #theThirdCondition>
-                <div *ngIf="item != 'Function'" class="flex flex-col">
-                  <span class="font-bold text-base leading-5">{{ item }}</span>
-                  <mat-form-field class="example-full-width w-5/6">
-                    <mat-label>{{ item }}</mat-label>
-                    <input matInput placeholder="Search..." />
-                  </mat-form-field>
-                </div>
-              </ng-template>
+              </div>
             </div>
           </form>
         </div>
@@ -109,7 +157,8 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-  <app-table-util-component [displayedColumns]="displayedColumns"
+  <app-table-util-component
+    [displayedColumns]="displayedColumns"
     [dataSource]="dataSource"
     [totalPage]="totalPage"
     [currentPage]="currentPageDefault"
@@ -120,6 +169,6 @@
     (editOnChange)="openEdit($event)"
     (removeOnChange)="openRemove($event)"
     contentButton="Create New Account"
-  >  
+  >
   </app-table-util-component>
 </div>

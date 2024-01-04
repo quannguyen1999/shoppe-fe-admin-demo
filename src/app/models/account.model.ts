@@ -7,6 +7,17 @@ export interface Account {
     isActive: boolean 
 }
 
+export interface AccountRequestModel {
+    id: string,
+    username: string,
+    createFromDate: Date | null,
+    createToDate: Date | null,
+    isActive: boolean | true,
+    fromBirthday: Date | null,
+    toBirthday: Date | null,
+    gender: boolean | null
+}
+
 export const ID: string = 'id';
 export const USERNAME: string = 'username';
 export const PASSWORD: string = 'password';
