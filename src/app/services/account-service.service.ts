@@ -45,6 +45,7 @@ export class AccountServiceService {
         gender: accountRequestModel?.gender,
         email: accountRequestModel?.email
       },
+      fetchPolicy: "network-only"
     })
     .pipe(
       map((response) => response.data.listAccount)

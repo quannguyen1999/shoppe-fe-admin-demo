@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { AVATAR_IMAGE } from '../../constants/constant-value-model';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,9 @@ import { MenuItem, MessageService } from 'primeng/api';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+
+  avatar: string = AVATAR_IMAGE;
+
   @Output() menuChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   currentTabMenu!: boolean;
   

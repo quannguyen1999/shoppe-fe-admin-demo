@@ -8,13 +8,56 @@
     
 </div>
 <form [formGroup]="accountForm" class="example-container m-10">
+  <div class="text-center justify-center">
+    <img src="{{selectedImage != null ? selectedImage : avatar}}" alt="" class="m-auto w-1/6 shadow-xl rounded-full mb-4">
+  </div>
+  
     <mat-form-field class="w-full">
       <mat-label>UserName</mat-label>
       <input matInput placeholder="Enter..." formControlName="username" required>
       @if (accountForm.get('username')!.invalid) {
-        <mat-error >{{getErrorMessage()}}</mat-error>
+        <mat-error >{{getErrorMessage('username')}}</mat-error>
       }
     </mat-form-field>
+
+     <mat-form-field class="w-full">
+      <mat-label>Birthday</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        formControlName="birthday"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      @if (accountForm.get('birthday')!.invalid) {
+        <mat-error >{{getErrorMessage('birthday')}}</mat-error>
+      }
+    </mat-form-field>
+
+   
+    <mat-label>Gender: </mat-label>
+    <mat-radio-group aria-label="Select an option" formControlName="gender">
+      <mat-radio-button checked="true" value="true">Boy</mat-radio-button>
+      <mat-radio-button value="false">Girl</mat-radio-button>
+      <mat-radio-button value="null">Gay</mat-radio-button>
+    </mat-radio-group>
+ 
+    <mat-form-field class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Enter..." formControlName="email" required>
+      @if (accountForm.get('email')!.invalid) {
+        <mat-error >{{getErrorMessage('email')}}</mat-error>
+      }
+    </mat-form-field>
+
+  
+    <mat-label>Upload Avatar: </mat-label>
+    <input accept=".png, .jpg" class="mb-4" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
+   
+
     <button class="mb-4 w-full h-10 text-xl text-white leading-5 bg-orange-200 hover:bg-orange-700" (click)="onClear()">
         Clear
     </button>

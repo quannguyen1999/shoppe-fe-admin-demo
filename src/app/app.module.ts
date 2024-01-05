@@ -48,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccountServiceService } from './services/account-service.service';
 import { GraphQLModule } from './config/graphql.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +74,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TableUtilComponentComponent
   ],
   imports: [
+    MatRadioModule,
     BrowserModule,
     AppRoutingModule,
     NgxChartsModule,

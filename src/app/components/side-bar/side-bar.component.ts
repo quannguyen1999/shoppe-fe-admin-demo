@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input } from '@angular/core';
 import { Menu } from '../../models/menu.model';
-import { listMenus } from '../../constants/menu-value-model';
+import { listMenus } from '../../constants/constant-value-model';
 import { Router } from '@angular/router';
 
 @Component({

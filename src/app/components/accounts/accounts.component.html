@@ -1,3 +1,4 @@
+
 <div class="w-full h-full m-auto">
   <app-title-component
     valueIcon="supervised_user_circle"
@@ -11,14 +12,13 @@
           <mat-icon>ballot</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div class="grid grid-rows-1">
+      <div class="grid grid-cols-1">
         <div class="row-span-1 scroll">
           <h2>Field Search</h2>
           <!-- FORM -->
           <form
-            class="example-form w-max mt-2 overflow-x-auto"
-            style="max-height: 300px"
-          >
+            class="mt-2 overflow-x-auto"
+            style="max-height: 300px">
             <!-- avoid css  -->
             <mat-form-field
               class="example-full-width w-5/6 ml-2 hidden"
@@ -34,7 +34,7 @@
             >
               <!-- USERNAME -->
               <mat-form-field
-                class="example-full-width w-5/6"
+               
                 *ngIf="item == 'username'"
               >
                 <mat-label>{{ item }}</mat-label>
@@ -49,7 +49,7 @@
 
               <!-- ID -->
               <mat-form-field
-                class="example-full-width w-5/6"
+            
                 *ngIf="item == 'id'"
               >
                 <mat-label>{{ item }}</mat-label>
@@ -64,7 +64,7 @@
 
               <!-- EMAIL -->
               <mat-form-field
-                class="example-full-width w-5/6"
+             
                 *ngIf="item == 'email'"
               >
                 <mat-label>{{ item }}</mat-label>
@@ -90,7 +90,7 @@
               <div *ngIf="item == 'created'" class="flex flex-col">
                 <div class="flex flex-row">
                   <div>
-                    <mat-form-field color="accent" class="customDateInput">
+                    <mat-form-field color="accent">
                       <mat-label>Create From Date</mat-label>
                       <input
                         matInput
@@ -107,7 +107,7 @@
                   </div>
                   -
                   <div>
-                    <mat-form-field color="accent" class="customDateInput">
+                    <mat-form-field color="accent">
                       <mat-label>Create To Date</mat-label>
                       <input
                         matInput
@@ -129,7 +129,7 @@
               <div *ngIf="item == 'birthday'" class="flex flex-col">
                 <div class="flex flex-row">
                   <div>
-                    <mat-form-field color="accent" class="customDateInput">
+                    <mat-form-field color="accent">
                       <mat-label>Birthday From Date</mat-label>
                       <input
                         matInput
@@ -146,7 +146,7 @@
                   </div>
                   -
                   <div>
-                    <mat-form-field color="accent" class="customDateInput">
+                    <mat-form-field color="accent" >
                       <mat-label>Birthday To Date</mat-label>
                       <input
                         matInput

@@ -14,7 +14,7 @@ import { accountColumns } from '../../constants/column-value';
 export class AccountsComponent implements OnInit{
   totalPage: number = 0;
   currentPageDefault: number = 0;
-  currentSizeDefault: number = 2;
+  currentSizeDefault: number = 4;
 
   //
   isLoadingPage: boolean = false;
@@ -28,8 +28,10 @@ export class AccountsComponent implements OnInit{
     isActive: true,
     fromBirthday: null,
     toBirthday: null,
+    birthday: null,
     gender: null,
-    email: null
+    email: null,
+    avatar: ''
   };
 
   //Table
@@ -48,7 +50,7 @@ export class AccountsComponent implements OnInit{
   }
   
   ngOnInit(): void {
-  
+   
   }
 
   onColumnShowChange(listValue: string[]){
@@ -63,6 +65,7 @@ export class AccountsComponent implements OnInit{
     const dialogRef = this.dialog.open(CreateAccountComponent);
     dialogRef.componentInstance.dialogAccountNotification.subscribe(() => {
       this.dialog.closeAll();
+      this.searchData();
     })
   }
 
