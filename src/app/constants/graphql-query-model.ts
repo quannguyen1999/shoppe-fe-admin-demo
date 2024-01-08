@@ -10,7 +10,8 @@ query AccountDetail(
   $createToDate: String,
   $isActive: Boolean,
   $gender: Boolean,
-  $email: String
+  $email: String,
+  $listSorted: [Map]
   ) {
   listAccount(
       accountRequestDto: {
@@ -24,7 +25,8 @@ query AccountDetail(
           createToDate: $createToDate,
           isActive: $isActive,
           gender: $gender,
-          email: $email
+          email: $email,
+          listSorted: $listSorted
       }
   ) {
     page,

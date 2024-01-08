@@ -21,6 +21,7 @@ export interface AccountRequestModel {
     isActive: boolean | true,
     fromBirthday: Date | null,
     toBirthday: Date | null,
+    listSorted: any[] | null
     
 }
 

@@ -24,7 +24,11 @@ export class AccountServiceService {
     return this.http.post(ACCOUNT_CREATE, account);
   }
 
-  getListAccount(page: number, size: number, fields?: string[], accountRequestModel?: AccountRequestModel): Observable<CommonPageInfo<Account>>{
+  getListAccount(page: number, 
+                size: number, 
+                fields?: string[], 
+                accountRequestModel?: AccountRequestModel
+  ): Observable<CommonPageInfo<Account>>{
     let query = this.queryRequest;
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";
@@ -43,7 +47,8 @@ export class AccountServiceService {
         createToDate: this.formatDateToYYYYMMDD(accountRequestModel?.createToDate),
         isActive: accountRequestModel?.isActive,
         gender: accountRequestModel?.gender,
-        email: accountRequestModel?.email
+        email: accountRequestModel?.email,
+        listSorted: accountRequestModel?.listSorted
       },
       fetchPolicy: "network-only"
     })

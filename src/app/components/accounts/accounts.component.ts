@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AccountServiceService } from '../../services/account-service.service';
 import { accountColumns } from '../../constants/column-value';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-accounts',
@@ -16,7 +17,7 @@ export class AccountsComponent implements OnInit{
   currentPageDefault: number = 0;
   currentSizeDefault: number = 4;
 
-  //
+  //To Know Page is Loading or not
   isLoadingPage: boolean = false;
 
   //Field To Search
@@ -31,7 +32,8 @@ export class AccountsComponent implements OnInit{
     birthday: null,
     gender: null,
     email: null,
-    avatar: ''
+    avatar: '',
+    listSorted: null
   };
 
   //Table
@@ -44,14 +46,13 @@ export class AccountsComponent implements OnInit{
 
   constructor(
     public dialog: MatDialog,
-    @Inject(AccountServiceService) public accountService: AccountServiceService
+    @Inject(AccountServiceService) public accountService: AccountServiceService,
+    private commonService: CommonService
   ) {
     this.searchData();
   }
   
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
 
   onColumnShowChange(listValue: string[]){
     this.listColumnShowChange = listValue;
@@ -79,14 +80,7 @@ export class AccountsComponent implements OnInit{
 
   exportExcel(){
     this.accountService.exportExcel(this.accountRequestModel).subscribe((blob: Blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'exportedData.xlsx';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
+      this.commonService.exportExcel(blob, 'exportData.xlsx');
     });
   }
 
@@ -112,18 +106,26 @@ export class AccountsComponent implements OnInit{
     this.dialog.open(CreateAccountComponent,{
       data: {
         id: id
-        // You can add more properties to pass additional data if needed
       }
     });
   }
 
   openRemove(id: string){
-    // console.log(id);
+   
   }
 
+  onSortChange(event: any){
+    //add Data
+    this.accountRequestModel.listSorted = [
+      {
+        field: event.active,
+        value: event.direction
+      }
+    ]
 
-
-  
+    //search data
+    this.searchData();
+  }
 
 
 }

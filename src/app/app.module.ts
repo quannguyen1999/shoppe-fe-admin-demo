@@ -49,6 +49,7 @@ import { AccountServiceService } from './services/account-service.service';
 import { GraphQLModule } from './config/graphql.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +102,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatDialogModule,
     HttpClientModule,
     GraphQLModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [MessageService, AccountServiceService],
   bootstrap: [AppComponent]

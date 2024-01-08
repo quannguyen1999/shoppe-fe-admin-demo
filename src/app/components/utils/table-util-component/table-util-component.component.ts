@@ -3,12 +3,14 @@ import {MatPaginator} from '@angular/material/paginator';
 import { startWith, switchMap } from 'rxjs';
 import { Account } from '../../../models/account.model';
 import { CommonPageInfo } from '../../../models/common-page.model';
+import { MatSort, Sort } from '@angular/material/sort';
 @Component({
   selector: 'app-table-util-component',
   templateUrl: './table-util-component.component.html',
   styleUrl: './table-util-component.component.scss'
 })
 export class TableUtilComponentComponent implements OnInit{
+
   @Input() displayedColumns: string[] = [];
 
   @Input() dataSource: any;
@@ -26,6 +28,8 @@ export class TableUtilComponentComponent implements OnInit{
   @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() removeOnChange: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output() dataSortChange: EventEmitter<{active: string, direction: string}> = new EventEmitter<{active: string, direction: string}>();
 
   @Output() searchData: EventEmitter<{ page: number; size: number }> = new EventEmitter<{ page: number; size: number }>();
 
@@ -54,6 +58,15 @@ export class TableUtilComponentComponent implements OnInit{
         page: event.pageIndex,
         size: this.currentSize,
     });
+  }
+
+  onSortChange(sort: Sort){
+    if(sort.direction == 'asc' || sort.direction == 'desc'){
+      this.dataSortChange.emit({
+        active: sort.active,
+        direction: sort.direction
+      });
+    }
   }
 
 }
