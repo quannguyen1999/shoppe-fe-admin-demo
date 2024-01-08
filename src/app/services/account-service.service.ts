@@ -28,7 +28,7 @@ export class AccountServiceService {
                 size: number, 
                 fields?: string[], 
                 accountRequestModel?: AccountRequestModel
-  ): Observable<CommonPageInfo<Account>>{
+  ): Observable<CommonPageInfo<any>>{
     let query = this.queryRequest;
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";

@@ -62,6 +62,6 @@
         Clear
     </button>
     <button class="w-full h-10 text-xl text-white leading-5 bg-orange-500 hover:bg-orange-700" (click)="onSubmit()">
-        Submit
+        {{isEdit ? 'Save' : 'Create'}}
     </button>
   </form>

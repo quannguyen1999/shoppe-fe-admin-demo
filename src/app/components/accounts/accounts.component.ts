@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AccountServiceService } from '../../services/account-service.service';
-import { accountColumns } from '../../constants/column-value';
+import { DEFAULT_ACCOUNT_COLUMNS } from '../../constants/column-value';
 import { CommonService } from '../../services/common.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class AccountsComponent implements OnInit{
   };
 
   //Table
-  displayedColumns: string[] = accountColumns;
+  displayedColumns: string[] = DEFAULT_ACCOUNT_COLUMNS;
   dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
 

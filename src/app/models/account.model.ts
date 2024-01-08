@@ -7,6 +7,7 @@ export interface Account {
     isActive: boolean 
 }
 
+
 export interface AccountRequestModel {
     id: string,
     username: string | null,

@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { ToastServiceService } from '../../../services/toast-service.service';
 import { Account, BIRTHDAY, EMAIL, USERNAME } from '../../../models/account.model';
 import { AVATAR_IMAGE } from '../../../constants/constant-value-model';
+import { DEFAULT_ACCOUNT_COLUMNS } from '../../../constants/column-value';
 
 @Component({
   selector: 'app-create-account',
@@ -23,8 +24,6 @@ export class CreateAccountComponent implements OnInit{
 
   isEdit: boolean = false;
 
-  // @Input() username = new FormControl('', [Validators.required, Validators.email]);
-
   @Output() dialogAccountNotification: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -33,16 +32,24 @@ export class CreateAccountComponent implements OnInit{
     private toastrService: ToastServiceService,
     private fb: FormBuilder
   ){
-  
     this.initForm();
-    // if(this.data !== null){
-    //   let username = listAccounts.find(t => t.id.toString() == data.id)?.username; 
-    //   if(data && data.id){
-    //     this.isEdit = true;
-    //     this.username.setValue(username || '');
-    //   }
-    // }
-   
+    if(this.data !== null){
+      this.isEdit = true;
+      accountService.getListAccount(0, 1, DEFAULT_ACCOUNT_COLUMNS).subscribe((data) => {
+        const result = data.data[0];
+        const parseDate = new Date(result.birthday);
+        this.accountForm.setValue({
+          id: result.id,
+          username: result.username,
+          birthday: parseDate,
+          email: result.email,
+          gender: result.gender
+        })
+
+        //Disable User name account
+        this.accountForm.get(USERNAME)?.disable();
+      })
+    } 
   }
 
   initForm(): void {
