@@ -25,6 +25,8 @@ export class TableUtilComponentComponent implements OnInit{
 
   @Input() isLoadingPage!: boolean;
 
+  @Input() disabledRemove: boolean = false;
+
   @Output() editOnChange: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() removeOnChange: EventEmitter<string> = new EventEmitter<string>();

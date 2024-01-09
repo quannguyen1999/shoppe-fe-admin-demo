@@ -38,12 +38,15 @@ export class CreateAccountComponent implements OnInit{
       accountService.getListAccount(0, 1, DEFAULT_ACCOUNT_COLUMNS).subscribe((data) => {
         const result = data.data[0];
         const parseDate = new Date(result.birthday);
+
+        console.log(result.gender)
+
         this.accountForm.setValue({
           id: result.id,
           username: result.username,
           birthday: parseDate,
           email: result.email,
-          gender: result.gender
+          gender: result.gender ? 'true' : 'false'
         })
 
         //Disable User name account

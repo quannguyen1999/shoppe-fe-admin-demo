@@ -31,7 +31,7 @@
         (cdkDropListDropped)="drop($event)">
         @for (item of show; track item) {
           
-          <div class="example-box" cdkDrag>{{item}}</div>
+          <div *ngIf="item != 'function' && item != 'id'" class="example-box" cdkDrag>{{item}}</div>
         }
       </div>
     </div>

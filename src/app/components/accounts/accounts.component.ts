@@ -12,14 +12,10 @@ import { CommonService } from '../../services/common.service';
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.scss'
 })
-export class AccountsComponent implements OnInit{
-  totalPage: number = 0;
-  currentPageDefault: number = 0;
-  currentSizeDefault: number = 4;
-
-  //To Know Page is Loading or not
-  isLoadingPage: boolean = false;
-
+export class AccountsComponent{
+  //SideBar
+  @Input() currentTabMenu!: boolean;
+  
   //Field To Search
   accountRequestModel: AccountRequestModel = {
     id: '',
@@ -36,23 +32,22 @@ export class AccountsComponent implements OnInit{
     listSorted: null
   };
 
-  //Table
+  //Init
   displayedColumns: string[] = DEFAULT_ACCOUNT_COLUMNS;
   dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
-
-  //SideBar
-  @Input() currentTabMenu!: boolean;
+  totalPage: number = 0;
+  currentPageDefault: number = 0;
+  currentSizeDefault: number = 4;
+  isLoadingPage: boolean = false;
 
   constructor(
-    public dialog: MatDialog,
     @Inject(AccountServiceService) public accountService: AccountServiceService,
+    private dialog: MatDialog,
     private commonService: CommonService
   ) {
     this.searchData();
   }
-  
-  ngOnInit(): void {}
 
   onColumnShowChange(listValue: string[]){
     this.listColumnShowChange = listValue;
@@ -84,7 +79,7 @@ export class AccountsComponent implements OnInit{
     });
   }
 
-  searchAccount(page: number, size: number, isRestPage: boolean){
+  searchAccount(page: number, size: number, isResetPage: boolean){
     this.isLoadingPage = true;
     
     //reset page
@@ -98,7 +93,7 @@ export class AccountsComponent implements OnInit{
       this.isLoadingPage = false;
       this.dataSource.data = data.data;
       this.totalPage = data.total;
-      this.currentPageDefault = isRestPage ? 0 : data.page;
+      this.currentPageDefault = isResetPage ? 0 : data.page;
     })
   }
 
@@ -108,10 +103,6 @@ export class AccountsComponent implements OnInit{
         id: id
       }
     });
-  }
-
-  openRemove(id: string){
-   
   }
 
   onSortChange(event: any){
@@ -126,6 +117,5 @@ export class AccountsComponent implements OnInit{
     //search data
     this.searchData();
   }
-
 
 }
