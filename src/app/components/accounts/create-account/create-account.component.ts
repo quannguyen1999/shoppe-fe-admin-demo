@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { listAccounts } from '../../../constants/account-value';
 import { AccountServiceService } from '../../../services/account-service.service';
-import { MessageService } from 'primeng/api';
 import { ToastServiceService } from '../../../services/toast-service.service';
 import { Account, BIRTHDAY, EMAIL, USERNAME } from '../../../models/account.model';
 import { AVATAR_IMAGE } from '../../../constants/constant-value-model';
@@ -94,7 +92,6 @@ export class CreateAccountComponent implements OnInit{
       (response) => {
         this.dialogAccountNotification.emit();
         this.toastrService.getPopUpSuccess('Account Create Success');
-
       }, 
       (error) => {
         this.toastrService.getPopUpError(error);

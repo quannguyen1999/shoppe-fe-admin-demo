@@ -4,7 +4,6 @@ import { Account, AccountRequestModel } from '../models/account.model';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
-import { environment } from '../../environments/environment';
 import { getAccountDetail } from '../constants/graphql-query-model';
 import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
 
@@ -58,10 +57,12 @@ export class AccountServiceService {
   }
 
   exportExcel(accountRequestModel: AccountRequestModel): Observable<Blob> {
+    let filterFields = accountRequestModel.listFields?.filter(field => field !== 'function');
+    accountRequestModel.listFields = filterFields;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post(ACCOUNT_EXPORT, { accountRequestModel }, { headers, responseType: 'blob' });
+    return this.http.post(ACCOUNT_EXPORT, accountRequestModel, { headers, responseType: 'blob' });
   }
 
   formatDateToYYYYMMDD(date: Date | null | undefined): string | undefined | null{

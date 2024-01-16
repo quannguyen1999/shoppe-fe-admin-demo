@@ -23,6 +23,7 @@ export interface AccountRequestModel {
     fromBirthday: Date | null,
     toBirthday: Date | null,
     listSorted: any[] | null
+    listFields: any[] | undefined
     
 }
 

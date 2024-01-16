@@ -6,6 +6,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { AccountServiceService } from '../../services/account-service.service';
 import { DEFAULT_ACCOUNT_COLUMNS } from '../../constants/column-value';
 import { CommonService } from '../../services/common.service';
+import { ToastServiceService } from '../../services/toast-service.service';
 
 @Component({
   selector: 'app-accounts',
@@ -29,13 +30,14 @@ export class AccountsComponent{
     gender: null,
     email: null,
     avatar: '',
-    listSorted: null
+    listSorted: null,
+    listFields: DEFAULT_ACCOUNT_COLUMNS
   };
 
   //Init
   displayedColumns: string[] = DEFAULT_ACCOUNT_COLUMNS;
-  dataSource = new MatTableDataSource<Account>();
   listColumnShowChange: string[] = [];
+  dataSource = new MatTableDataSource<Account>();
   totalPage: number = 0;
   currentPageDefault: number = 0;
   currentSizeDefault: number = 4;
@@ -44,7 +46,8 @@ export class AccountsComponent{
   constructor(
     @Inject(AccountServiceService) public accountService: AccountServiceService,
     private dialog: MatDialog,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private toastrService: ToastServiceService
   ) {
     this.searchData();
   }
@@ -74,6 +77,7 @@ export class AccountsComponent{
   }
 
   exportExcel(){
+    this.accountRequestModel.listFields = this.listColumnShowChange.length == 0 ? [...DEFAULT_ACCOUNT_COLUMNS] : [...this.listColumnShowChange];
     this.accountService.exportExcel(this.accountRequestModel).subscribe((blob: Blob) => {
       this.commonService.exportExcel(blob, 'exportData.xlsx');
     });

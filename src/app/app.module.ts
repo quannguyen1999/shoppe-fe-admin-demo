@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,6 +50,7 @@ import { GraphQLModule } from './config/graphql.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +106,7 @@ import { MatSortModule } from '@angular/material/sort';
     ProgressSpinnerModule,
     MatSortModule
   ],
-  providers: [MessageService, AccountServiceService],
+  providers: [MessageService, AccountServiceService,   { provide: ErrorHandler, useClass: GlobalErrorHandlerService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,4 +18,8 @@ export class ToastServiceService {
     this.messageService.add({severity:'success', summary: 'success', detail: message});
   }
 
+  getPopUpErrorTypeString(value: any){
+    this.messageService.add({severity:'error', summary: 'Error', detail: value});
+  }
+
 }
