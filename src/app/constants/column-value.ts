@@ -1,1 +1,2 @@
 export const DEFAULT_ACCOUNT_COLUMNS: string[] = ['id', 'username', 'birthday', 'gender', 'email', 'created', 'updated', 'isActive', 'function'];
+export const DEFAULT_CATEGORY_COLUMNS: string[] = ['id', 'name', 'image', 'created', 'updated', 'function'];

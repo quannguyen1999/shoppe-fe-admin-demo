@@ -1,0 +1,27 @@
+<div class="bg-orange-300 text-white text-center font-bold text-2xl p-4">
+    <h2 *ngIf="!isEdit; else createNew">Create new Category</h2>
+    <ng-template #createNew>
+      <h2>
+        Edit Category
+      </h2>
+    </ng-template>
+    
+</div>
+<form [formGroup]="categoryForm" class="example-container m-10">
+    <mat-form-field class="w-full">
+      <mat-label>Na,e</mat-label>
+      <input matInput placeholder="Enter..." formControlName="name" required>
+      @if (categoryForm.get('name')!.invalid) {
+        <mat-error >{{getErrorMessage('name')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-label>Upload Image: </mat-label>
+    <input accept=".png, .jpg" class="mb-4" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
+    <button class="mb-4 w-full h-10 text-xl text-white leading-5 bg-orange-200 hover:bg-orange-700" (click)="onClear()">
+        Clear
+    </button>
+    <button class="w-full h-10 text-xl text-white leading-5 bg-orange-500 hover:bg-orange-700" (click)="onSubmit()">
+        {{isEdit ? 'Save' : 'Create'}}
+    </button>
+  </form>

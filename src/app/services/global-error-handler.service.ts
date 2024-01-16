@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { ToastServiceService } from './toast-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 @Injectable()

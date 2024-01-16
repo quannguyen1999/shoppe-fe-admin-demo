@@ -3,3 +3,8 @@ import { environment } from "../../environments/environment";
 export const ACCOUNT_CREATE: string = environment.apiUrl + 'accounts/create';
 
 export const ACCOUNT_EXPORT: string = environment.apiUrl + 'accounts/export';
+
+
+export const CATEGORY_CREATE: string = environment.apiUrl + 'categories/create';
+
+export const CATEGORY_EXPORT: string = environment.apiUrl + 'categories/export';

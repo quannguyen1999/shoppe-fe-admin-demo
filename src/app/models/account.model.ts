@@ -24,7 +24,6 @@ export interface AccountRequestModel {
     toBirthday: Date | null,
     listSorted: any[] | null
     listFields: any[] | undefined
-    
 }
 
 export const ID: string = 'id';

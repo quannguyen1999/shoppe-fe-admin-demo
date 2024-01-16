@@ -37,8 +37,6 @@ export class CreateAccountComponent implements OnInit{
         const result = data.data[0];
         const parseDate = new Date(result.birthday);
 
-        console.log(result.gender)
-
         this.accountForm.setValue({
           id: result.id,
           username: result.username,

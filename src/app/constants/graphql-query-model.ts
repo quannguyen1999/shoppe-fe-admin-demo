@@ -1,3 +1,4 @@
+// ACCOUNT
 export const getAccountDetail: string = `
 query AccountDetail(
   $page: Int!,
@@ -26,6 +27,40 @@ query AccountDetail(
           isActive: $isActive,
           gender: $gender,
           email: $email,
+          listSorted: $listSorted
+      }
+  ) {
+    page,
+    size,
+    total,
+    data{
+      $fields
+    }
+  }
+}
+`;
+
+
+
+//CATEGORY
+export const getCategoryDetail: string = `
+query CategoryDetail(
+  $page: Int!,
+  $size: Int!,
+  $id: String,
+  $name: String,
+  $createFromDate: String,
+  $createToDate: String,
+  $listSorted: [Map]
+  ) {
+  listCategory(
+      categoryRequestDto: {
+          id: $id,
+          page: $page,
+          size: $size,
+          name: $name,
+          createFromDate: $createFromDate,
+          createToDate: $createToDate,
           listSorted: $listSorted
       }
   ) {

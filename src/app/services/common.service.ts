@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class CommonService {
 
-  constructor() { }
-
   public exportExcel(blob: Blob, nameFile: string){
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');

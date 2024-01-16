@@ -51,6 +51,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
+import { CreateCategoryComponent } from './components/categorys/create-category/create-category.component';
+import { CreateProductComponent } from './components/products/create-product/create-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +75,9 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
     CategorysComponent,
     ProductsComponent,
     TitleComponentComponent,
-    TableUtilComponentComponent
+    TableUtilComponentComponent,
+    CreateCategoryComponent,
+    CreateProductComponent
   ],
   imports: [
     MatRadioModule,
