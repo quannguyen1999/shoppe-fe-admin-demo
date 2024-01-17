@@ -22,7 +22,7 @@ export class CreateCategoryComponent  implements OnInit{
 
   isEdit: boolean = false;
 
-  @Output() dialogAccountNotification: EventEmitter<any> = new EventEmitter();
+  @Output() dialogCategoryNotification: EventEmitter<any> = new EventEmitter();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: string},
@@ -48,7 +48,7 @@ export class CreateCategoryComponent  implements OnInit{
     this.categoryForm = this.fb.group({
       id: [null],
       name:  ['', Validators.required],
-      image:  ['', Validators.required]
+      image:  ['']
     })
   }
 
@@ -78,7 +78,7 @@ export class CreateCategoryComponent  implements OnInit{
     const formData: Category = this.categoryForm.value;
     this.categoryService.createCategory(formData).subscribe(
       (response) => {
-        this.dialogAccountNotification.emit();
+        this.dialogCategoryNotification.emit();
         this.toastrService.getPopUpSuccess('Category Create Success');
       }, 
       (error) => {

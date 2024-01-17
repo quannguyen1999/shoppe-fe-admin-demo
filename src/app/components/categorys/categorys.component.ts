@@ -56,11 +56,11 @@ export class CategorysComponent {
   }
 
   openDialogForm() {
-    // const dialogRef = this.dialog.open(CreateCategoryComponent);
-    // dialogRef.componentInstance.dialogAccountNotification.subscribe(() => {
-    //   this.dialog.closeAll();
-    //   this.searchData();
-    // })
+    const dialogRef = this.dialog.open(CreateCategoryComponent);
+    dialogRef.componentInstance.dialogCategoryNotification.subscribe(() => {
+      this.dialog.closeAll();
+      this.searchData();
+    })
   }
 
   pageOnChange(event: any){

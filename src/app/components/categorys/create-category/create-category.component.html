@@ -9,7 +9,7 @@
 </div>
 <form [formGroup]="categoryForm" class="example-container m-10">
     <mat-form-field class="w-full">
-      <mat-label>Na,e</mat-label>
+      <mat-label>Name</mat-label>
       <input matInput placeholder="Enter..." formControlName="name" required>
       @if (categoryForm.get('name')!.invalid) {
         <mat-error >{{getErrorMessage('name')}}</mat-error>
