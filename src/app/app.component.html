@@ -1,8 +1,14 @@
-<app-animation-env></app-animation-env>
-<app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
-<div class="flex flex-row m-auto" [style]="'max-width:'+maxWidth">
-    <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
-    <router-outlet></router-outlet>
+<div *ngIf="isLoginPage, else notLoginPage">
+    <app-login-page></app-login-page>
 </div>
-<app-footer [maxWidth]="maxWidth"></app-footer>
+<ng-template #notLoginPage>
+    <app-animation-env></app-animation-env>
+    <app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
+    <div class="flex flex-row m-auto" [style]="'max-width:' + maxWidth">
+        <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
+        <router-outlet></router-outlet>
+    </div>
+    <app-footer [maxWidth]="maxWidth"></app-footer>
+</ng-template>
+
 

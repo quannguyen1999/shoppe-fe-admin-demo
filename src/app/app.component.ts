@@ -11,9 +11,12 @@ import { BaseChartDirective } from 'ng2-charts';
 export class AppComponent  implements OnInit{
   maxWidth: string = '1300px';
   currentTabMenu: boolean = true;
+  isLoginPage: boolean = false;
 
   ngOnInit(): void {
-      this.currentTabMenu = true;
+    this.currentTabMenu = true;
+       // Get the current URL
+    this.isLoginPage = window.location.pathname == '/login';
   }
 
   onMenuChange(menuChange: boolean): void{
