@@ -40,8 +40,6 @@ query AccountDetail(
 }
 `;
 
-
-
 //CATEGORY
 export const getCategoryDetail: string = `
 query CategoryDetail(
@@ -55,6 +53,39 @@ query CategoryDetail(
   ) {
   listCategory(
       categoryRequestDto: {
+          id: $id,
+          page: $page,
+          size: $size,
+          name: $name,
+          createFromDate: $createFromDate,
+          createToDate: $createToDate,
+          listSorted: $listSorted
+      }
+  ) {
+    page,
+    size,
+    total,
+    data{
+      $fields
+    }
+  }
+}
+`;
+
+
+//PRODUCT
+export const getProductDetail: string = `
+query ProductDetail(
+  $page: Int!,
+  $size: Int!,
+  $id: String,
+  $name: String,
+  $createFromDate: String,
+  $createToDate: String,
+  $listSorted: [Map]
+  ) {
+  listProduct(
+      productRequestDto: {
           id: $id,
           page: $page,
           size: $size,

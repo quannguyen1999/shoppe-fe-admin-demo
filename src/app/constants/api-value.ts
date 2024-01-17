@@ -8,3 +8,8 @@ export const ACCOUNT_EXPORT: string = environment.apiUrl + 'accounts/export';
 export const CATEGORY_CREATE: string = environment.apiUrl + 'categories/create';
 
 export const CATEGORY_EXPORT: string = environment.apiUrl + 'categories/export';
+
+
+export const PRODUCT_CREATE: string = environment.apiUrl + 'products/create';
+
+export const PRODUCT_EXPORT: string = environment.apiUrl + 'products/export';
