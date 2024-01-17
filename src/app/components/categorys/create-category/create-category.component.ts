@@ -12,7 +12,7 @@ import { Category, IMAGE, NAME } from '../../../models/category.model';
   templateUrl: './create-category.component.html',
   styleUrl: './create-category.component.scss'
 })
-export class CreateCategoryComponent  implements OnInit{
+export class CreateCategoryComponent implements OnInit{
 
   selectedImage: any | null;
 
@@ -63,7 +63,7 @@ export class CreateCategoryComponent  implements OnInit{
       return 'You must enter a ' + nameField + ' value';
     }
 
-    return this.categoryForm.get(NAME)!.hasError(NAME) ? 'Not a valid username' : '';
+    return this.categoryForm.get(NAME)!.hasError(NAME) ? 'Not a valid name' : '';
   }
 
   onClear(){

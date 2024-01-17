@@ -18,7 +18,7 @@ export interface CagegoryRequestModel {
 }
 
 export const ID: string = 'id';
-export const NAME: string = 'username';
-export const IMAGE: string = 'birthday';
+export const NAME: string = 'name';
+export const IMAGE: string = 'image';
 export const CREATED_AT: string = 'createdAt';
 export const UPDATED_AT: string = 'updatedAt';

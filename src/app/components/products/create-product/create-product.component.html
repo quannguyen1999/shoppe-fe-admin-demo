@@ -1,1 +1,51 @@
-<p>create-product works!</p>
+<div class="bg-orange-300 text-white text-center font-bold text-2xl p-4">
+    <h2 *ngIf="!isEdit; else createNew">Create new Product</h2>
+    <ng-template #createNew>
+      <h2>
+        Edit Product
+      </h2>
+    </ng-template>
+    
+</div>
+<form [formGroup]="productForm" class="example-container m-10">
+    <mat-form-field class="w-full">
+      <mat-label>Name Product</mat-label>
+      <input matInput placeholder="Enter..." formControlName="name" required>
+      @if (productForm.get('name')!.invalid) {
+        <mat-error >{{getErrorMessage('name')}}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Enter..." formControlName="quantity" required>
+        @if (productForm.get('quantity')!.invalid) {
+          <mat-error >{{getErrorMessage('quantity')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Enter..." formControlName="price" required>
+        @if (productForm.get('price')!.invalid) {
+          <mat-error >{{getErrorMessage('price')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Discount</mat-label>
+        <input matInput placeholder="Enter..." formControlName="discount" required>
+        @if (productForm.get('discount')!.invalid) {
+          <mat-error >{{getErrorMessage('discount')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-label>Upload Image: </mat-label>
+    <input accept=".png, .jpg" class="mb-4" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
+    <button class="mb-4 w-full h-10 text-xl text-white leading-5 bg-orange-200 hover:bg-orange-700" (click)="onClear()">
+        Clear
+    </button>
+    <button class="w-full h-10 text-xl text-white leading-5 bg-orange-500 hover:bg-orange-700" (click)="onSubmit()">
+        {{isEdit ? 'Save' : 'Create'}}
+    </button>
+  </form>

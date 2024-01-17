@@ -59,11 +59,11 @@ export class ProductsComponent {
   }
 
   openDialogForm() {
-    // const dialogRef = this.dialog.open(CreateProductComponent);
-    // dialogRef.componentInstance.dialogCategoryNotification.subscribe(() => {
-    //   this.dialog.closeAll();
-    //   this.searchData();
-    // })
+    const dialogRef = this.dialog.open(CreateProductComponent);
+    dialogRef.componentInstance.dialogProductNotification.subscribe(() => {
+      this.dialog.closeAll();
+      this.searchData();
+    })
   }
 
   pageOnChange(event: any){

@@ -25,8 +25,8 @@ export interface ProductRequestModel {
 }
 
 export const ID: string = 'id';
-export const NAME: string = 'username';
-export const IMAGE: string = 'birthday';
+export const NAME: string = 'name';
+export const IMAGE: string = 'image';
 export const QUANTITY: string = 'quantity';
 export const PRICE: string = 'price';
 export const DISCOUNT: string = 'discount';
