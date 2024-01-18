@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
+  imageLoginPage: string = 'assets/images/loginPage.png';
+
+  rememberMe: string[] = [];
 
 }

@@ -10,6 +10,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class AppComponent  implements OnInit{
   maxWidth: string = '1300px';
+ 
   currentTabMenu: boolean = true;
   isLoginPage: boolean = false;
 
