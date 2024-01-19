@@ -3,8 +3,8 @@
 </div>
 <ng-template #notLoginPage>
     <app-animation-env></app-animation-env>
-    <app-header [maxWidth]="maxWidth" (menuChange)="onMenuChange($event)"></app-header>
-    <div class="flex flex-row m-auto" [style]="'max-width:' + maxWidth">
+    <app-header  (menuChange)="onMenuChange($event)"></app-header>
+    <div class="flex flex-row m-auto w-full" >
         <app-side-bar [currentTabMenu]="currentTabMenu"></app-side-bar>
         <router-outlet></router-outlet>
     </div>

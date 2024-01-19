@@ -14,8 +14,6 @@ export class HeaderComponent implements OnInit {
 
   @Output() menuChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   currentTabMenu!: boolean;
-  
-  @Input() maxWidth!: string;
 
   items: MenuItem[] | undefined;
 
