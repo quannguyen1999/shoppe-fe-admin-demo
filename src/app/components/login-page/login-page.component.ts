@@ -31,7 +31,7 @@ export const authCodeFlowConfig: AuthConfig = {
 
 
   showDebugInformation: true,
-
+  
   requestAccessToken: true
 };
 
@@ -51,7 +51,7 @@ export class LoginPageComponent {
     this.oauthService.initLoginFlow();
     this.oauthService.configure(authCodeFlowConfig);
     this.oauthService.setStorage(sessionStorage)
-    console.log(this.oauthService.getAccessToken)
+console.log(this.oauthService.getAccessToken)
     console.log(this.oauthService.getRefreshToken)
     console.log(this.oauthService.getAccessToken())
     console.log(this.oauthService.getRefreshToken())
@@ -59,8 +59,8 @@ export class LoginPageComponent {
 
   submitLogin(){
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(()=>{
-      alert(this.oauthService.hasValidAccessToken)
-    });
+       alert(this.oauthService.hasValidAccessToken)
+     });
   }
 
 }

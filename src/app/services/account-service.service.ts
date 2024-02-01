@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account, AccountRequestModel } from '../models/account.model';
 import { Apollo, gql } from 'apollo-angular';
@@ -17,6 +17,46 @@ export class AccountServiceService {
   constructor(private http: HttpClient,
               private apollo: Apollo
   ) {
+  }
+
+  redirectToAuthorization(){
+    const authorizationUrl = 'http://localhost:8070/oauth2/authorize' +
+    '?client_id=admin' +
+    '&redirect_uri=http://127.0.0.1:4200/home' +
+    '&scope=read write' +
+    '&response_type=code' +
+    '&response_mode=form_post';
+
+    window.location.href = authorizationUrl;
+  }
+
+  getToken(code: string){
+    const tokenEndpoint = 'http://localhost:8070/oauth2/token';
+    const clientId = 'admin';
+    const clientSecret = 'password'; // Replace with your actual client secret
+    const redirectUri = 'http://127.0.0.1:4200/home';
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    const body = new HttpParams()
+      .set('grant_type', 'authorization_code')
+      .set('code', code)
+      .set('client_id', clientId)
+      // .set('client_secret', clientSecret)
+      .set('redirect_uri', redirectUri);
+
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe(
+      (response: any) => {
+        // Handle successful token response
+        console.log('Token response:', response);
+      },
+      (error) => {
+        // Handle error
+        console.error('Error fetching token:', error);
+      }
+    );
   }
 
   createAccount(account: Account){
