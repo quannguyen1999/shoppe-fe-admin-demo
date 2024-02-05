@@ -54,7 +54,7 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { CreateCategoryComponent } from './components/categorys/create-category/create-category.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,10 +111,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     HttpClientModule,
     GraphQLModule,
     ProgressSpinnerModule,
-    MatSortModule,
-    OAuthModule.forRoot(
-
-    )
+    MatSortModule
   ],
   providers: [MessageService, AccountServiceService,   { provide: ErrorHandler, useClass: GlobalErrorHandlerService }],
   bootstrap: [AppComponent]

@@ -6,6 +6,8 @@ import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { getAccountDetail } from '../constants/graphql-query-model';
 import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
+import { environment } from '../../environments/environment';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,41 +22,50 @@ export class AccountServiceService {
   }
 
   redirectToAuthorization(){
-    const authorizationUrl = 'http://localhost:8070/oauth2/authorize' +
+    const authorizationUrl = environment.oauthUrl + 'oauth2/authorize' +
     '?client_id=admin' +
-    '&redirect_uri=http://127.0.0.1:4200/home' +
+    '&redirect_uri=' + environment.redirectUrl +
     '&scope=read write' +
     '&response_type=code' +
     '&response_mode=form_post';
-
     window.location.href = authorizationUrl;
   }
 
   getToken(code: string){
-    const tokenEndpoint = 'http://localhost:8070/oauth2/token';
-    const clientId = 'admin';
-    const clientSecret = 'password'; // Replace with your actual client secret
-    const redirectUri = 'http://127.0.0.1:4200/home';
-
+    const tokenEndpoint = environment.apiUrl + 'accounts/token';
+    const redirectUri = environment.redirectUrl;
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-
     const body = new HttpParams()
-      .set('grant_type', 'authorization_code')
       .set('code', code)
-      .set('client_id', clientId)
-      // .set('client_secret', clientSecret)
-      .set('redirect_uri', redirectUri);
-
+      .set('redirectUrl', redirectUri);
     this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe(
       (response: any) => {
-        // Handle successful token response
         console.log('Token response:', response);
+        localStorage.setItem(ACCESS_TOKEN, response?.access_token)
+        localStorage.setItem(REFRESH_TOKEN, response?.refresh_token)
+      },
+      (error) => {
+       console.error('Error fetching token:', error);
+      }
+    );
+  }
+
+  getRefreshtoken(refreshToken: string){
+    const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new HttpParams()
+      .set('refreshToken', refreshToken);
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe(
+      (response: any) => {
+        console.log('refreshToken response:', response);
       },
       (error) => {
         // Handle error
-        console.error('Error fetching token:', error);
+        console.error('Error fetching refreshToken:', error);
       }
     );
   }
