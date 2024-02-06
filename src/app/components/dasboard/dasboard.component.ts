@@ -18,8 +18,8 @@ export class DasboardComponent {
       const code = params['code'];
       
       if (code) {
-        this.accountService.getToken(code);
-        this.accountService.getRefreshtoken(localStorage.getItem(REFRESH_TOKEN));
+        this.accountService.getRequestToken(code);
+        this.accountService.getRequestRefreshtoken(localStorage.getItem(REFRESH_TOKEN));
       }
     });
   }

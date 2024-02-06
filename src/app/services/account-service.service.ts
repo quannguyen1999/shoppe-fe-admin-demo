@@ -34,7 +34,7 @@ export class AccountServiceService {
     window.location.href = authorizationUrl;
   }
 
-  getToken(code: string){
+  getRequestToken(code: string){
     const tokenEndpoint = environment.apiUrl + 'accounts/token';
     const redirectUri = environment.redirectUrl;
     const headers = new HttpHeaders({
@@ -49,6 +49,10 @@ export class AccountServiceService {
     });
   }
 
+  getTokenInSession(){
+    return localStorage.getItem(ACCESS_TOKEN);
+  }
+
   handlerSaveToken(response: any){
     console.log('response:', response);
     localStorage.setItem(ACCESS_TOKEN, response.access_token)
@@ -60,7 +64,7 @@ export class AccountServiceService {
     this.router.navigate(['/']);
   }
 
-  getRefreshtoken(refreshToken: string | null){
+  getRequestRefreshtoken(refreshToken: string | null){
     if(refreshToken == null){
       return;
     }
@@ -68,8 +72,7 @@ export class AccountServiceService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-    const body = new HttpParams()
-      .set('refreshToken', refreshToken);
+    const body = new HttpParams().set('refreshToken', refreshToken);
     this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
       next: this.handlerSaveToken.bind(this),
       error: this.handlerErrorResponse.bind(this)

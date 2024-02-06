@@ -53,7 +53,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 import { CreateCategoryComponent } from './components/categorys/create-category/create-category.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -79,8 +78,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     TitleComponentComponent,
     TableUtilComponentComponent,
     CreateCategoryComponent,
-    CreateProductComponent,
-    LoginPageComponent
+    CreateProductComponent
   ],
   imports: [
     MatRadioModule,

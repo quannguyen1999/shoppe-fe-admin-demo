@@ -5,36 +5,37 @@ import { DasboardComponent } from './components/dasboard/dasboard.component';
 import { PageNotFoundComponent } from './components/status/page-not-found/page-not-found.component';
 import { CategorysComponent } from './components/categorys/categorys.component';
 import { ProductsComponent } from './components/products/products.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
+import { authServiceGuard } from './services/auth-service.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginPageComponent
-  },
-  {
     path: 'home',
-    component: DasboardComponent
+    component: DasboardComponent,
+    canActivate: [authServiceGuard]
   },
   {
     path: 'accounts',
-    component: AccountsComponent
+    component: AccountsComponent,
+    canActivate: [authServiceGuard]
   },
   {
     path: 'categories',
-    component: CategorysComponent
+    component: CategorysComponent,
+    canActivate: [authServiceGuard]
   },
   {
     path: 'products',
-    component: ProductsComponent
+    component: ProductsComponent,
+    canActivate: [authServiceGuard]
   },
   {
     path: '',
-    redirectTo: 'login', pathMatch: 'full'
+    redirectTo: 'home', pathMatch: 'full'
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    component: PageNotFoundComponent,
+    canActivate: [authServiceGuard]
   }
 ];
 
