@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountServiceService } from '../../services/account-service.service';
-import { ACCESS_TOKEN } from '../../constants/constant-value-model';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constants/constant-value-model';
 
 @Component({
   selector: 'app-dasboard',
@@ -18,12 +18,8 @@ export class DasboardComponent {
       const code = params['code'];
       
       if (code) {
-        // Do something with the code, e.g., send it to your backend for token exchange
-        console.log('Authorization Code:', code);
         this.accountService.getToken(code);
-
-        // console.log(localStorage.getItem(ACCESS_TOKEN);
-
+        this.accountService.getRefreshtoken(localStorage.getItem(REFRESH_TOKEN));
       }
     });
   }

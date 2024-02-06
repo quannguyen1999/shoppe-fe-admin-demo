@@ -8,6 +8,8 @@ import { getAccountDetail } from '../constants/graphql-query-model';
 import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
 import { environment } from '../../environments/environment';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/constant-value-model';
+import { Router } from '@angular/router';
+import { callback } from 'chart.js/dist/helpers/helpers.core';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class AccountServiceService {
   queryRequest: string = getAccountDetail;
 
   constructor(private http: HttpClient,
-              private apollo: Apollo
+              private apollo: Apollo,
+              private router: Router
   ) {
   }
 
@@ -40,34 +43,37 @@ export class AccountServiceService {
     const body = new HttpParams()
       .set('code', code)
       .set('redirectUrl', redirectUri);
-    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe(
-      (response: any) => {
-        console.log('Token response:', response);
-        localStorage.setItem(ACCESS_TOKEN, response?.access_token)
-        localStorage.setItem(REFRESH_TOKEN, response?.refresh_token)
-      },
-      (error) => {
-       console.error('Error fetching token:', error);
-      }
-    );
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
+      next: this.handlerSaveToken.bind(this),
+      error: this.handlerErrorResponse.bind(this)
+    });
   }
 
-  getRefreshtoken(refreshToken: string){
+  handlerSaveToken(response: any){
+    console.log('response:', response);
+    localStorage.setItem(ACCESS_TOKEN, response.access_token)
+    localStorage.setItem(REFRESH_TOKEN, response.refresh_token)
+  }
+
+  handlerErrorResponse(){
+    console.error('Error fetching');
+    this.router.navigate(['/']);
+  }
+
+  getRefreshtoken(refreshToken: string | null){
+    if(refreshToken == null){
+      return;
+    }
     const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
     const body = new HttpParams()
       .set('refreshToken', refreshToken);
-    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe(
-      (response: any) => {
-        console.log('refreshToken response:', response);
-      },
-      (error) => {
-        // Handle error
-        console.error('Error fetching refreshToken:', error);
-      }
-    );
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
+      next: this.handlerSaveToken.bind(this),
+      error: this.handlerErrorResponse.bind(this)
+    });
   }
 
   createAccount(account: Account){
