@@ -49,6 +49,20 @@ export class AccountServiceService {
     });
   }
 
+  getRefreshToken(){
+    const tokenEndpoint = environment.apiUrl + 'accounts/token';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', localStorage.getItem(REFRESH_TOKEN) || "");
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
+      next: this.handlerSaveToken.bind(this),
+      error: this.handlerErrorResponse.bind(this)
+    });
+  }
+
   getTokenInSession(){
     return localStorage.getItem(ACCESS_TOKEN);
   }

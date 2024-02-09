@@ -44,7 +44,7 @@ import { CategorysComponent } from './components/categorys/categorys.component';
 import { ProductsComponent } from './components/products/products.component';
 import { TitleComponentComponent } from './components/utils/title-component/title-component.component';
 import { TableUtilComponentComponent } from './components/utils/table-util-component/table-util-component.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AccountServiceService } from './services/account-service.service';
 import { GraphQLModule } from './config/graphql.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -53,6 +53,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 import { CreateCategoryComponent } from './components/categorys/create-category/create-category.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
+import { IntercepterHttpTokenService } from './config/intercepter-http-token.service';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,15 @@ import { CreateProductComponent } from './components/products/create-product/cre
     ProgressSpinnerModule,
     MatSortModule
   ],
-  providers: [MessageService, AccountServiceService,   { provide: ErrorHandler, useClass: GlobalErrorHandlerService }],
+  providers: [
+    MessageService, 
+    AccountServiceService,   
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IntercepterHttpTokenService,
+      multi: true
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
