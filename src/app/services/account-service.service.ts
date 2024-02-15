@@ -7,9 +7,11 @@ import { CommonPageInfo } from '../models/common-page.model';
 import { getAccountDetail } from '../constants/graphql-query-model';
 import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
 import { environment } from '../../environments/environment';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/constant-value-model';
+import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN } from '../constants/constant-value-model';
 import { Router } from '@angular/router';
 import { callback } from 'chart.js/dist/helpers/helpers.core';
+import { local } from 'd3-selection';
+import { LocalStorageCustomService } from './local-storage-custom.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,8 @@ export class AccountServiceService {
 
   constructor(private http: HttpClient,
               private apollo: Apollo,
-              private router: Router
+              private router: Router,
+              private localStorageCustom: LocalStorageCustomService
   ) {
   }
 
@@ -34,63 +37,45 @@ export class AccountServiceService {
     window.location.href = authorizationUrl;
   }
 
-  getRequestToken(code: string){
-    const tokenEndpoint = environment.apiUrl + 'accounts/token';
-    const redirectUri = environment.redirectUrl;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    const body = new HttpParams()
-      .set('code', code)
-      .set('redirectUrl', redirectUri);
-    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
-      next: this.handlerSaveToken.bind(this),
-      error: this.handlerErrorResponse.bind(this)
-    });
+  getNumberOfRequest(){
+    
+    const currentValue = Number.parseInt((this.localStorageCustom.getWithExpiry(NUMBER_TRY_REQUEST) || '0'));
+   
+    return currentValue;
   }
 
-  getRefreshToken(){
-    const tokenEndpoint = environment.apiUrl + 'accounts/token';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    const body = new HttpParams()
-      .set('grant_type', 'refresh_token')
-      .set('refresh_token', localStorage.getItem(REFRESH_TOKEN) || "");
-    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
-      next: this.handlerSaveToken.bind(this),
-      error: this.handlerErrorResponse.bind(this)
-    });
+  setNumberOfRequest(currentValue: number){
+    this.localStorageCustom.setWithExpiry(NUMBER_TRY_REQUEST, (currentValue + 1).toString(), 5);
   }
 
-  getTokenInSession(){
+  getToken(){
+   
     return localStorage.getItem(ACCESS_TOKEN);
   }
 
+  getRefreshToken(){
+    return localStorage.getItem(REFRESH_TOKEN);
+  }
+
+  requestLoginPage(){
+    const authorizationUrl = environment.oauthUrl + 'oauth2/authorize' +
+      '?client_id=admin' +
+      '&redirect_uri=' + environment.redirectUrl +
+      '&scope=read write' +
+      '&response_type=code' +
+      '&response_mode=form_post';
+    this.setNumberOfRequest(this.getNumberOfRequest());
+    window.location.href = authorizationUrl;
+  }
+
   handlerSaveToken(response: any){
-    console.log('response:', response);
     localStorage.setItem(ACCESS_TOKEN, response.access_token)
     localStorage.setItem(REFRESH_TOKEN, response.refresh_token)
   }
 
   handlerErrorResponse(){
-    console.error('Error fetching');
-    this.router.navigate(['/']);
-  }
-
-  getRequestRefreshtoken(refreshToken: string | null){
-    if(refreshToken == null){
-      return;
-    }
-    const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-    const body = new HttpParams().set('refreshToken', refreshToken);
-    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
-      next: this.handlerSaveToken.bind(this),
-      error: this.handlerErrorResponse.bind(this)
-    });
+    let value = localStorage.getItem(NUMBER_TRY_REQUEST) || 0;
+    localStorage.setItem(NUMBER_TRY_REQUEST, (Number.parseInt(value.toString()) + 1).toString());
   }
 
   createAccount(account: Account){

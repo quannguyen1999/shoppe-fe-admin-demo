@@ -7,7 +7,11 @@ export class GlobalErrorHandlerService implements ErrorHandler{
   constructor(private toastrService: ToastServiceService) { }
 
   handleError(error: any): void {
-    if (error instanceof HttpErrorResponse && error.status === 500) {
+    if (error instanceof HttpErrorResponse && (error.status === 500)) {
+      this.toastrService.getPopUpErrorTypeString("Internal Server Error");
+    }
+
+    if (error instanceof HttpErrorResponse && (error.status === 401)) {
       this.toastrService.getPopUpErrorTypeString("Internal Server Error");
     }
   }
