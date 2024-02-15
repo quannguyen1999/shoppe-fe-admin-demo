@@ -47,9 +47,12 @@
                 <mat-icon class=" text-white text-xl m-auto cursor-pointer">drag_indicator</mat-icon>
             </div>
             <div class="m-auto ">
-                <img 
-                src="{{avatar}}" class="w-10 h-8 cursor-pointer rounded-full" alt="">
-            
+                <button (click)="logout()">
+                    <img 
+                    src="{{avatar}}" class="w-10 h-8 cursor-pointer rounded-full" alt="">
+                
+                </button>
+              
             </div>
         </div> 
     </div>

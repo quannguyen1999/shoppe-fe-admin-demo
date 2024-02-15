@@ -1,24 +1,35 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { ACCESS_TOKEN } from '../constants/constant-value-model';
 import { AccountServiceService } from '../services/account-service.service';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+import { ToastServiceService } from '../services/toast-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntercepterHttpTokenService implements HttpInterceptor {
 
-  constructor(private accountService: AccountServiceService){
+  constructor(private accountService: AccountServiceService,
+            private router: Router,
+            private http: HttpClient,
+            private toastrService: ToastServiceService
+    ){
 
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):  Observable<HttpEvent<Object>> {
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ` + localStorage.getItem(ACCESS_TOKEN)
-      }
-    });
+    
+    if(this.accountService.getToken() != null){
+      console.log(this.accountService.getToken())
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ` + this.accountService.getToken()
+        }
+      });
+    }
+   
     return next.handle(request).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse  && error.status === 401) {
         return this.handle401Error(request, next);
@@ -28,7 +39,23 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
-    this.accountService.getRefreshToken();
+    let value = this.accountService.getNumberOfRequest();
+    this.accountService.setNumberOfRequest(value);
+    // if(value >= 2){
+    //   this.toastrService.getPopUpError("Internal Server Error")
+    // }
+    //get refresh token 
+    const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refreshToken', this.accountService.getRefreshToken() || "");
+    this.http.post(tokenEndpoint, body.toString(), { headers }).subscribe({
+      next: this.accountService.handlerSaveToken.bind(this),
+      error: this.accountService.handlerErrorResponse.bind(this)
+    });
     return next.handle(request);
   }
 

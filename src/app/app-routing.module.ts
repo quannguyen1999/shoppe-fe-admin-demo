@@ -6,6 +6,8 @@ import { PageNotFoundComponent } from './components/status/page-not-found/page-n
 import { CategorysComponent } from './components/categorys/categorys.component';
 import { ProductsComponent } from './components/products/products.component';
 import { authServiceGuard } from './services/auth-service.guard';
+import { PageErrorComponent } from './components/status/page-error/page-error.component';
+import { AuthenticationResolver } from './config/authorization-config.resolver';
 
 const routes: Routes = [
   {
@@ -29,13 +31,20 @@ const routes: Routes = [
     canActivate: [authServiceGuard]
   },
   {
+    path: 'error',
+    component: PageErrorComponent
+  },
+  {
+    path: 'not-found',
+    component: PageNotFoundComponent
+  },
+  {
     path: '',
     redirectTo: 'home', pathMatch: 'full'
   },
   {
     path: '**',
-    component: PageNotFoundComponent,
-    canActivate: [authServiceGuard]
+    component: PageNotFoundComponent
   }
 ];
 

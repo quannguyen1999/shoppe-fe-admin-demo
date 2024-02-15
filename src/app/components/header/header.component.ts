@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { AVATAR_IMAGE } from '../../constants/constant-value-model';
+import { AccountServiceService } from '../../services/account-service.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
 
   constructor(private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private accountService: AccountServiceService
     ) {}
 
   menuOnChange(){
@@ -66,5 +68,12 @@ export class HeaderComponent implements OnInit {
 
   redirectHomePage(){
     this.router.navigate(['/']);
+  }
+
+  logout(){
+    console.log("clear")
+    localStorage.clear();
+    this.accountService.requestLoginPage();
+
   }
 }

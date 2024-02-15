@@ -54,6 +54,8 @@ import { GlobalErrorHandlerService } from './services/global-error-handler.servi
 import { CreateCategoryComponent } from './components/categorys/create-category/create-category.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
 import { IntercepterHttpTokenService } from './config/intercepter-http-token.service';
+import { PageErrorComponent } from './components/status/page-error/page-error.component';
+import { AuthenticationResolver } from './config/authorization-config.resolver';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { IntercepterHttpTokenService } from './config/intercepter-http-token.ser
     TitleComponentComponent,
     TableUtilComponentComponent,
     CreateCategoryComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    PageErrorComponent
   ],
   imports: [
     MatRadioModule,
@@ -114,7 +117,8 @@ import { IntercepterHttpTokenService } from './config/intercepter-http-token.ser
   ],
   providers: [
     MessageService, 
-    AccountServiceService,   
+    AccountServiceService,  
+    AuthenticationResolver, 
     {
       provide: HTTP_INTERCEPTORS,
       useClass: IntercepterHttpTokenService,
