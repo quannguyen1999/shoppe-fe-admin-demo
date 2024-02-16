@@ -1,8 +1,8 @@
 
     <app-animation-env></app-animation-env>
     <app-header *ngIf="isSecure == true"  (menuChange)="onMenuChange($event)"></app-header>
-    <div *ngIf="isSecure == true" class="flex flex-row m-auto w-full" >
-        <app-side-bar   [currentTabMenu]="currentTabMenu"></app-side-bar>
+    <div class="flex flex-row m-auto w-full" >
+        <app-side-bar  *ngIf="isSecure == true"  [currentTabMenu]="currentTabMenu"></app-side-bar>
         <router-outlet></router-outlet>
     </div>
     <div class="m-auto center text-center" *ngIf="isLoading">

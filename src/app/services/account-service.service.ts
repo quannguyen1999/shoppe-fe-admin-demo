@@ -45,7 +45,7 @@ export class AccountServiceService {
   }
 
   setNumberOfRequest(currentValue: number){
-    this.localStorageCustom.setWithExpiry(NUMBER_TRY_REQUEST, (currentValue + 1).toString(), 20);
+    this.localStorageCustom.setWithExpiry(NUMBER_TRY_REQUEST, (currentValue + 1).toString(), 5000);
   }
 
   getToken(){
