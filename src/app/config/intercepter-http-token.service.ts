@@ -30,6 +30,11 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
       });
     }
    
+    if(this.accountService.getNumberOfRequest() >= 2){
+      this.router.navigate(["/error"]);
+      return throwError(null);
+    }
+
     return next.handle(request).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse  && error.status === 401) {
         return this.handle401Error(request, next);
@@ -41,9 +46,10 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let value = this.accountService.getNumberOfRequest();
     this.accountService.setNumberOfRequest(value);
-    // if(value >= 2){
-    //   this.toastrService.getPopUpError("Internal Server Error")
-    // }
+    if(value >= 2){
+      this.router.navigate(["/error"]);
+      return throwError(null);
+    }
     //get refresh token 
     const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
     const headers = new HttpHeaders({

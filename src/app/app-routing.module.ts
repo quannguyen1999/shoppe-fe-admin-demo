@@ -35,12 +35,12 @@ const routes: Routes = [
     component: PageErrorComponent
   },
   {
-    path: 'not-found',
+    path: 'notFound',
     component: PageNotFoundComponent
   },
   {
     path: '',
-    redirectTo: 'home', pathMatch: 'full'
+    redirectTo: 'notFound', pathMatch: 'full'
   },
   {
     path: '**',
