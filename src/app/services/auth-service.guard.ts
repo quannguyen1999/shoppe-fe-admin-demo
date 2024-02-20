@@ -17,8 +17,7 @@ export class authServiceGuard  implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const numberOfRequest = this.accountService.getNumberOfRequest();
     const code = route.queryParams['code'];
-    
-    if (code && this.accountService.getToken() == null && this.accountService.getRefreshToken() == null && numberOfRequest <= 1
+    if (code && this.accountService.getToken() == null && numberOfRequest <= 1
     ) { 
       const tokenEndpoint = environment.apiUrl + 'accounts/token';
       const redirectUri = environment.redirectUrl;
@@ -40,7 +39,6 @@ export class authServiceGuard  implements CanActivate {
       '&response_type=code' +
       '&response_mode=form_post';
       this.accountService.setNumberOfRequest(numberOfRequest);
-
       window.location.href = authorizationUrl;
     } else if(numberOfRequest >= 2) {
       console.log("bug on auth-service")
