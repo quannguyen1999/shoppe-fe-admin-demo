@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountServiceService } from '../../../services/account-service.service';
 import { ToastServiceService } from '../../../services/toast-service.service';
-import { Account, BIRTHDAY, EMAIL, USERNAME } from '../../../models/account.model';
+import { Account, BIRTHDAY, EMAIL, USERNAME, AccountRequestModel } from '../../../models/account.model';
 import { AVATAR_IMAGE } from '../../../constants/constant-value-model';
 import { DEFAULT_ACCOUNT_COLUMNS } from '../../../constants/column-value';
-
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.scss'
 })
 export class CreateAccountComponent implements OnInit{
+
+  @ViewChild('fileInput') fileInput: ElementRef | any;
 
   selectedImage: any | null;
 
@@ -30,10 +31,11 @@ export class CreateAccountComponent implements OnInit{
     private toastrService: ToastServiceService,
     private fb: FormBuilder
   ){
+
     this.initForm();
     if(this.data !== null){
       this.isEdit = true;
-      accountService.getListAccount(0, 1, DEFAULT_ACCOUNT_COLUMNS).subscribe((data) => {
+      accountService.getListAccount(0, 1, DEFAULT_ACCOUNT_COLUMNS, {id: data.id}).subscribe((data) => {
         const result = data.data[0];
         const parseDate = new Date(result.birthday);
 
@@ -42,7 +44,9 @@ export class CreateAccountComponent implements OnInit{
           username: result.username,
           birthday: parseDate,
           email: result.email,
-          gender: result.gender ? 'true' : 'false'
+          gender: result.gender ? 'true' : 'false',
+          mfaEnabled: result.mfaEnabled,
+          mfaRegistered: result.mfaRegistered
         })
 
         //Disable User name account
@@ -57,7 +61,9 @@ export class CreateAccountComponent implements OnInit{
       username:  ['', Validators.required],
       birthday:  ['', Validators.required],
       email:  ['', Validators.required],
-      gender:  ['true']
+      gender:  ['true'],
+      mfaEnabled: [true],
+      mfaRegistered: [true]
     })
   }
 
@@ -86,15 +92,28 @@ export class CreateAccountComponent implements OnInit{
       return;
     }
     const formData: Account = this.accountForm.value;
-    this.accountService.createAccount(formData).subscribe(
-      (response) => {
-        this.dialogAccountNotification.emit();
-        this.toastrService.getPopUpSuccess('Account Create Success');
-      }, 
-      (error) => {
-        this.toastrService.getPopUpError(error);
-      }
-    )
+    if(this.isEdit){
+      this.accountService.updateAccount(formData).subscribe(
+        (response) => {
+          this.dialogAccountNotification.emit();
+          this.toastrService.getPopUpSuccess('Account Update Success');
+        }, 
+        (error) => {
+          this.toastrService.getPopUpError(error);
+        }
+      )
+    }else{
+      this.accountService.createAccount(formData).subscribe(
+        (response) => {
+          this.dialogAccountNotification.emit();
+          this.toastrService.getPopUpSuccess('Account Create Success');
+        }, 
+        (error) => {
+          this.toastrService.getPopUpError(error);
+        }
+      )
+    }
+   
   }
 
   onFileSelected(event: any){
@@ -108,5 +127,9 @@ export class CreateAccountComponent implements OnInit{
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  selectFile() {
+    this.fileInput.nativeElement.click();
   }
 }

@@ -10,20 +10,20 @@ export interface Account {
 
 export interface AccountRequestModel {
     id: string,
-    username: string | null,
-    birthday: Date | null,
-    gender: boolean | null,
-    email: string | null,
-    avatar: string | null,
+    username?: string | null,
+    birthday?: Date | null,
+    gender?: boolean | null,
+    email?: string | null,
+    avatar?: string | null,
 
     //Search
-    createFromDate: Date | null,
-    createToDate: Date | null,
-    isActive: boolean | true,
-    fromBirthday: Date | null,
-    toBirthday: Date | null,
-    listSorted: any[] | null
-    listFields: any[] | undefined
+    createFromDate?: Date | null,
+    createToDate?: Date | null,
+    isActive?: boolean | true,
+    fromBirthday?: Date | null,
+    toBirthday?: Date | null,
+    listSorted?: any[] | null
+    listFields?: any[] | undefined
 }
 
 export const ID: string = 'id';

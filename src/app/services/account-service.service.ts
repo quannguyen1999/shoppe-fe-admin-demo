@@ -5,7 +5,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { getAccountDetail } from '../constants/graphql-query-model';
-import { ACCOUNT_CREATE, ACCOUNT_EXPORT } from '../constants/api-value';
+import { ACCOUNT_CREATE, ACCOUNT_EXPORT, ACCOUNT_PUT } from '../constants/api-value';
 import { environment } from '../../environments/environment';
 import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN } from '../constants/constant-value-model';
 import { Router } from '@angular/router';
@@ -80,6 +80,10 @@ export class AccountServiceService {
 
   createAccount(account: Account){
     return this.http.post(ACCOUNT_CREATE, account);
+  }
+
+  updateAccount(account: Account){
+    return this.http.put(ACCOUNT_PUT, account);
   }
 
   getListAccount(page: number, 
