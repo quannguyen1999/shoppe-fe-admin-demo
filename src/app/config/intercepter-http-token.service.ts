@@ -5,6 +5,7 @@ import { AccountServiceService } from '../services/account-service.service';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { ToastServiceService } from '../services/toast-service.service';
+import { ACCESS_TOKEN } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler):  Observable<HttpEvent<Object>> {
     
     if(this.accountService.getToken() != null){
-      console.log(this.accountService.getToken())
+      // console.log(this.accountService.getToken())
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ` + this.accountService.getToken()
@@ -51,6 +52,7 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
       return throwError(null);
     }
     //get refresh token 
+    localStorage.removeItem(ACCESS_TOKEN);
     const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
