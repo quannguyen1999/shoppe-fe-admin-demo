@@ -5,7 +5,7 @@ import { AccountServiceService } from '../services/account-service.service';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { ToastServiceService } from '../services/toast-service.service';
-import { ACCESS_TOKEN } from '../constants/constant-value-model';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,12 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
     return next.handle(request).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse  && error.status === 401) {
         return this.handle401Error(request, next);
+      }
+      if (error.url == environment.apiUrl + 'accounts/token' && error instanceof HttpErrorResponse  && error.status === 500) {
+        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(REFRESH_TOKEN);
+        this.router.navigate(["/error"]);
+        return next.handle(request);
       }
       return throwError(error);
     }));

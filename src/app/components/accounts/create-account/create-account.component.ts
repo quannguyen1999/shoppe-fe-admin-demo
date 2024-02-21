@@ -23,6 +23,8 @@ export class CreateAccountComponent implements OnInit{
 
   isEdit: boolean = false;
 
+  isAccountAdmin: boolean = false;
+
   @Output() dialogAccountNotification: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -35,6 +37,8 @@ export class CreateAccountComponent implements OnInit{
     this.initForm();
     if(this.data !== null){
       this.isEdit = true;
+    
+
       accountService.getListAccount(0, 1, DEFAULT_ACCOUNT_COLUMNS, {id: data.id}).subscribe((data) => {
         const result = data.data[0];
         const parseDate = new Date(result.birthday);
@@ -48,6 +52,10 @@ export class CreateAccountComponent implements OnInit{
           mfaEnabled: result.mfaEnabled,
           mfaRegistered: result.mfaRegistered
         })
+
+        if(result.username == 'admin'){
+          this.isAccountAdmin = true;
+        }
 
         //Disable User name account
         this.accountForm.get(USERNAME)?.disable();
@@ -88,6 +96,10 @@ export class CreateAccountComponent implements OnInit{
   } 
 
   onSubmit(){
+    if(this.isAccountAdmin){
+      this.toastrService.getPopUpErrorTypeString("Admin Can't edit");
+      return;
+    }
     if(this.accountForm.invalid){
       return;
     }
