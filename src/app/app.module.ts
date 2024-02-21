@@ -56,6 +56,7 @@ import { CreateProductComponent } from './components/products/create-product/cre
 import { IntercepterHttpTokenService } from './config/intercepter-http-token.service';
 import { PageErrorComponent } from './components/status/page-error/page-error.component';
 import { AuthenticationResolver } from './config/authorization-config.resolver';
+import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { AuthenticationResolver } from './config/authorization-config.resolver';
     TableUtilComponentComponent,
     CreateCategoryComponent,
     CreateProductComponent,
-    PageErrorComponent
+    PageErrorComponent,
+    ProgressSpinnerComponent
   ],
   imports: [
     MatRadioModule,

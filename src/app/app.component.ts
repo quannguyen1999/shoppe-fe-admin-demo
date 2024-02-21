@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountServiceService } from './services/account-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '../environments/environment';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
-
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -36,7 +33,6 @@ export class AppComponent  implements OnInit{
       this.isSecure = this.accountService.getToken() != null;
      
     }, 1000)); // 2000 milliseconds delay
-
   }
 
   onMenuChange(menuChange: boolean): void{
