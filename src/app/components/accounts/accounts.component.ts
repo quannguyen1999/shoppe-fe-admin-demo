@@ -46,8 +46,7 @@ export class AccountsComponent{
   constructor(
     @Inject(AccountServiceService) public accountService: AccountServiceService,
     private dialog: MatDialog,
-    private commonService: CommonService,
-    private toastrService: ToastServiceService
+    private commonService: CommonService
   ) {
     this.searchData();
   }
@@ -91,7 +90,7 @@ export class AccountsComponent{
     this.totalPage = 0;
     this.currentPageDefault = 0;
 
-    //seatch page
+    //search page
     this.accountService.getListAccount(page, size, this.displayedColumns, this.accountRequestModel)
     .subscribe((data) => {
       this.isLoadingPage = false;
@@ -107,6 +106,12 @@ export class AccountsComponent{
         id: id
       }
     });
+
+    this.dialog.afterAllClosed.subscribe({
+      next:()=>{
+        this.searchData();
+      }
+    })
   }
 
   onSortChange(event: any){
@@ -117,7 +122,6 @@ export class AccountsComponent{
         value: event.direction
       }
     ]
-
     //search data
     this.searchData();
   }

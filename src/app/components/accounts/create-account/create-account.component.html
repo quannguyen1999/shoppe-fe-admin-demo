@@ -10,7 +10,10 @@
 <form [formGroup]="accountForm" class="example-container m-10">
   <div class="text-center justify-center">
     <input accept=".png, .jpg" #fileInput class="mb-4 hidden" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
-    <img src="{{selectedImage != null ? selectedImage : avatar}}" alt="" class="m-auto w-1/6 shadow-xl rounded-full mb-4 max-h-56 cursor-pointer"  (click)="selectFile()">
+    <div class=" relative inline-block image-container">
+      <img src="{{selectedImage != null ? selectedImage : avatar}}" alt="" class="m-auto w-32 shadow-xl rounded-full mb-4 h-32 cursor-pointer"  (click)="selectFile()">
+      <div class="overlay-text cursor-pointer" (click)="selectFile()">Upload Image</div>
+    </div>
   </div>
     <mat-form-field class="w-full">
       <mat-label>UserName</mat-label>
