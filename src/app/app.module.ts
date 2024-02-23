@@ -57,7 +57,7 @@ import { IntercepterHttpTokenService } from './config/intercepter-http-token.ser
 import { PageErrorComponent } from './components/status/page-error/page-error.component';
 import { AuthenticationResolver } from './config/authorization-config.resolver';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
-
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,7 +115,8 @@ import { ProgressSpinnerComponent } from './components/progress-spinner/progress
     HttpClientModule,
     GraphQLModule,
     ProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatMenuModule
   ],
   providers: [
     MessageService, 

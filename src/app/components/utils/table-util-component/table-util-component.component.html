@@ -47,10 +47,10 @@
         </td>
       </tr>
     </table> 
-    <div class="text-center" *ngIf="isLoadingPage">
+    <div   style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="isLoadingPage">
       <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
     </div>
-    
+
     <mat-paginator
       [pageIndex]="currentPage"
       [length]="totalPage"

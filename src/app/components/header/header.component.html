@@ -43,13 +43,17 @@
                 </p-menu>
             </div>
             <div class="m-auto ">
-                <mat-icon class=" text-white text-xl m-auto cursor-pointer" badge="2">notifications</mat-icon>
+                    <span [matMenuTriggerFor]="menuLanguage"> <mat-icon class=" text-white text-xl m-auto cursor-pointer" badge="2">notifications</mat-icon></span>
+                    <mat-menu #menuLanguage="matMenu">
+                        <button mat-menu-item>Tiếng Việt</button>
+                        <button mat-menu-item>Tiếng Anh</button>
+                    </mat-menu>
             </div>
             <div class="m-auto ">
                 <mat-icon class=" text-white text-xl m-auto cursor-pointer">drag_indicator</mat-icon>
             </div>
             <div class="m-auto ">
-                <button (click)="logout()">
+                <button (click)="logout()" class="w-8 h-8 cursor-pointer rounded-full">
                     <img 
                     src="{{avatar}}" class="w-8 h-8 cursor-pointer rounded-full" alt="">
                 </button>
