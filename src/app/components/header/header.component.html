@@ -29,18 +29,32 @@
             </span>
         </div>
         <div class="flex flex-row w-fit px-10 text-end h-full leading-5 gap-3">
+            <div class="m-auto">
+                <span class="text-white">
+                    <p>{{ formatCurrentDate() }}</p>
+                </span>
+            </div>
             <div class="m-auto ">
            
-                <mat-icon (click)="menu.toggle($event)" class="text-white text-xl m-auto cursor-pointer">settings</mat-icon>
-                <p-menu #menu [model]="items" [popup]="true"  autoDisplay="false">
-                    <ng-template pTemplate="item" let-item>
-                       <div class="flex flex-row p-auto">
-                            <div [ngClass]="item.icon" class="p-5 w-fit"></div>
-                            <span  class="p-5 w-11/12">{{item.label}}</span>
-                            <div class="pi pi-check p-5 w-fit"></div>
-                       </div>
-                    </ng-template>
-                </p-menu>
+                <mat-icon  [matMenuTriggerFor]="menuSetting" class="text-white text-xl m-auto cursor-pointer">settings</mat-icon>
+                <mat-menu #menuSetting="matMenu">
+                    <button mat-menu-item  class="grid grid-cols-2">
+                        <mat-icon>
+                            flash_on
+                        </mat-icon>
+                        <div>
+                            Light
+                        </div>
+                    </button>
+                    <button mat-menu-item  class="grid grid-cols-2">
+                        <mat-icon>
+                            flash_off
+                        </mat-icon>
+                        <div>
+                            Dark
+                        </div>
+                    </button>
+                </mat-menu>
             </div>
             <div class="m-auto ">
                     <span [matMenuTriggerFor]="menuLanguage"> <mat-icon class=" text-white text-xl m-auto cursor-pointer" badge="2">notifications</mat-icon></span>
@@ -52,11 +66,34 @@
             <div class="m-auto ">
                 <mat-icon class=" text-white text-xl m-auto cursor-pointer">drag_indicator</mat-icon>
             </div>
-            <div class="m-auto ">
-                <button (click)="logout()" class="w-8 h-8 cursor-pointer rounded-full">
-                    <img 
-                    src="{{avatar}}" class="w-8 h-8 cursor-pointer rounded-full" alt="">
-                </button>
+            <div class="m-auto flex flex-row">
+                <div>
+                    <img src="{{avatar}}"  class="w-10 h-8 cursor-pointer rounded-full" alt="" [matMenuTriggerFor]="menuAvatar">
+                    <mat-menu #menuAvatar="matMenu">
+                        <button mat-menu-item  class="grid grid-cols-2">
+                            <mat-icon>
+                                    perm_identity
+                            </mat-icon>
+                            <div>
+                                Info
+                            </div>
+                        </button>
+                        <button mat-menu-item  class="grid grid-cols-2" (click)="logout()">
+                            <mat-icon>
+                                exit_to_app
+                            </mat-icon>
+                            <div>
+                                Logout
+                            </div>
+                        </button>
+                    </mat-menu>
+                </div>
+                
+                <div>
+                    <span class="text-white font-bold">
+                        Hello Admin
+                    </span>
+                </div>
             </div>
         </div> 
     </div>

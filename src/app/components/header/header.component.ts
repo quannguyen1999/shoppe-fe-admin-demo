@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { AVATAR_IMAGE } from '../../constants/constant-value-model';
 import { AccountServiceService } from '../../services/account-service.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +16,21 @@ export class HeaderComponent implements OnInit {
 
   @Output() menuChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   currentTabMenu!: boolean;
+  
+  currentDate: Date;
 
-  items: MenuItem[] | undefined;
+  datePipe: DatePipe | undefined;
 
   constructor(private messageService: MessageService,
     private router: Router,
     private accountService: AccountServiceService
-    ) {}
+    ) {
+      this.datePipe = new DatePipe('en-US');
+      this.currentDate = new Date();
+      setInterval(() => {
+        this.currentDate = new Date();
+      }, 1000); // Update the date every second
+  }
 
   menuOnChange(){
     this.currentTabMenu = !this.currentTabMenu;
@@ -30,32 +39,6 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit() {
     this.currentTabMenu = true;
-    this.items = [
-      {
-          label: 'Light',
-          icon: 'pi pi-fw pi-moon ',
-          
-          command: () => {
-            this.update();
-        }
-      },
-      {
-          label: 'Dark',
-      
-          icon: 'pi pi-fw pi-sun',
-          command: () => {
-            this.update();
-        }
-      },
-      {
-        label: 'Both',
-       
-        icon: 'pi pi-fw pi-slack',
-        command: () => {
-          this.update();
-      }
-      }
-  ];
   }
 
   update() {
@@ -74,6 +57,10 @@ export class HeaderComponent implements OnInit {
     console.log("clear")
     localStorage.clear();
     this.accountService.requestLoginPage();
-
   }
+
+  formatCurrentDate(): string {
+    return this.datePipe?.transform(this.currentDate, 'dd/MM/yyyy HH:mm:ss') || '';
+  }
+
 }
