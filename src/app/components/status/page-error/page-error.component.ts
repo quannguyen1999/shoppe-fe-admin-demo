@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageCustomService } from '../../../services/local-storage-custom.service';
 import { NUMBER_TRY_REQUEST } from '../../../constants/constant-value-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-error',
@@ -9,7 +10,7 @@ import { NUMBER_TRY_REQUEST } from '../../../constants/constant-value-model';
 })
 export class PageErrorComponent implements OnInit{
 
-  constructor(private localStorageCustom: LocalStorageCustomService){
+  constructor(private router: Router){
 
   }
 
@@ -20,6 +21,10 @@ export class PageErrorComponent implements OnInit{
 
     // console.log(Number.parseInt((this.localStorageCustom.getWithExpiry(NUMBER_TRY_REQUEST) || '0')))
 
+  }
+
+  redirectToHomePage(): void{
+    this.router.navigate(['/']);
   }
 
 }

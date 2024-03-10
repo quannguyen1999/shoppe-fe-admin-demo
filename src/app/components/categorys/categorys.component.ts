@@ -93,6 +93,10 @@ export class CategorysComponent {
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = isResetPage ? 0 : data.page;
+    },
+    (error) => {
+      this.isLoadingPage = false;
+      this.toastrService.getPopUpErrorTypeString("Internal Server Error");
     })
   }
 

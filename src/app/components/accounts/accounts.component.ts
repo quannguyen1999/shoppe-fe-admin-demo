@@ -46,7 +46,8 @@ export class AccountsComponent{
   constructor(
     @Inject(AccountServiceService) public accountService: AccountServiceService,
     private dialog: MatDialog,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private toastrService: ToastServiceService
   ) {
     this.searchData();
   }
@@ -97,6 +98,10 @@ export class AccountsComponent{
       this.dataSource.data = data.data;
       this.totalPage = data.total;
       this.currentPageDefault = isResetPage ? 0 : data.page;
+    },
+    (error) => {
+      this.isLoadingPage = false;
+      this.toastrService.getPopUpErrorTypeString("Internal Server Error");
     })
   }
 

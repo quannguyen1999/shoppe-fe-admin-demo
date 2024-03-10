@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account, AccountRequestModel } from '../models/account.model';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { getAccountDetail } from '../constants/graphql-query-model';
 import { ACCOUNT_CREATE, ACCOUNT_EXPORT, ACCOUNT_PUT } from '../constants/api-value';
@@ -61,7 +61,7 @@ export class AccountServiceService {
     const authorizationUrl = environment.oauthUrl + 'oauth2/authorize' +
       '?client_id=admin' +
       '&redirect_uri=' + environment.redirectUrl +
-      '&scope=read write' +
+      '&scope=read write' +~
       '&response_type=code' +
       '&response_mode=form_post';
     this.setNumberOfRequest(this.getNumberOfRequest());
@@ -116,6 +116,12 @@ export class AccountServiceService {
     })
     .pipe(
       map((response) => response.data.listAccount)
+      // ,
+      // catchError((error) => {
+      //     // Handle errors here
+      //     console.error('Error occurred:', error);
+      //     return throwError('An error occurred. Please try again later.');
+      // })
     );
   }
 

@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8 m-auto overflow-y-auto" style="width: 100%;">
+<div class="mat-elevation-z8 m-auto overflow-y-auto" style="width: 100%; height: 400px;">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)">
       <ng-container
         *ngFor="let item of displayedColumns"
@@ -41,13 +41,13 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      <tr class="mat-row" *matNoDataRow >
+      <tr class="mat-row" *matNoDataRow   style="width: 100%; height: 400px;">
         <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length" *ngIf="!isLoadingPage">
           <h3 class="text-center font-bold">No Data</h3>
         </td>
       </tr>
     </table> 
-    <div   style="display: flex; justify-content: center; align-items: center; background: white;" *ngIf="isLoadingPage">
+    <div   style="display: flex; justify-content: center; align-items: center; background: white;height: 400px;" *ngIf="isLoadingPage">
       <p-progressSpinner styleClass="w-2rem h-2rem" strokeWidth="5" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
     </div>
 
