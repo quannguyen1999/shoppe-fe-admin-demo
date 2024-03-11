@@ -58,6 +58,8 @@ import { PageErrorComponent } from './components/status/page-error/page-error.co
 import { AuthenticationResolver } from './config/authorization-config.resolver';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,7 +118,9 @@ import { MatMenuModule } from '@angular/material/menu';
     GraphQLModule,
     ProgressSpinnerModule,
     MatSortModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule
+    
   ],
   providers: [
     MessageService, 

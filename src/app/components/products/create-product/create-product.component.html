@@ -42,6 +42,35 @@
 
     <mat-label>Upload Image: </mat-label>
     <input accept=".png, .jpg" class="mb-4" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
+    <img src="{{selectedImage != null ? selectedImage : imageFake}}" alt="" class="m-auto w-48 shadow-xl mb-4 h-48 cursor-pointer"  (click)="selectFile()">
+
+  
+    <mat-form-field class="w-full">
+      <mat-label>Category</mat-label>
+      <input matInput type="text"
+             placeholder="Search for a Category"
+             formControlName="category"
+             
+           
+             [matAutocomplete]="auto"
+             class="w-full focus:outline-none"
+             required
+
+             #inputCategory
+             [value]="inputCategory.name"
+             (keyup.enter)="enterSearchCategory(inputCategory.value)"
+       >
+       @if (productForm.get('category')!.invalid) {
+              <mat-error >{{getErrorMessage('category')}}</mat-error>
+        }
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+        <mat-option *ngFor="let data of filteredSearchInput | async" [value]="data">
+            {{ data.name }}
+        </mat-option>
+      </mat-autocomplete>
+      </mat-form-field>
+  
+
     <button class="mb-4 w-full h-10 text-xl text-white leading-5 bg-orange-200 hover:bg-orange-700" (click)="onClear()">
         Clear
     </button>

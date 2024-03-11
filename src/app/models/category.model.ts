@@ -4,7 +4,6 @@ export interface Category {
     image: string
 }
 
-
 export interface CagegoryRequestModel {
     id: string,
     name: string | null,

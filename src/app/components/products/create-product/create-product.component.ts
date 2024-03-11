@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { AVATAR_IMAGE } from '../../../constants/constant-value-model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastServiceService } from '../../../services/toast-service.service';
 import { DEFAULT_PRODUCT_COLUMNS } from '../../../constants/column-value';
 import { ProductServiceService } from '../../../services/product-service.service';
-import { DISCOUNT, IMAGE, NAME, PRICE, Product, QUANTITY } from '../../../models/product.model';
+import { CATEGORY, DISCOUNT, IMAGE, NAME, PRICE, Product, QUANTITY } from '../../../models/product.model';
+import { Observable, map, startWith } from 'rxjs';
+import { CagegoryRequestModel, Category } from '../../../models/category.model';
+import { CategoryServiceService } from '../../../services/category-service.service';
 
 @Component({
   selector: 'app-create-product',
@@ -13,6 +16,10 @@ import { DISCOUNT, IMAGE, NAME, PRICE, Product, QUANTITY } from '../../../models
   styleUrl: './create-product.component.scss'
 })
 export class CreateProductComponent implements OnInit{
+
+
+  @ViewChild('fileInput') fileInput: ElementRef | any;
+
 
   selectedImage: any | null;
 
@@ -22,11 +29,26 @@ export class CreateProductComponent implements OnInit{
 
   isEdit: boolean = false;
 
+  // Search filter
+  dataCategory: Category[] = [];
+  filteredSearchInput!: Observable<Category[]>;
+
+  categoryRequestModel: CagegoryRequestModel = {
+    id: '',
+    name: '',
+    image: '',
+    createFromDate: null,
+    createToDate: null,
+    listSorted: null,
+    listFields: ['id', 'name']
+  };
+
   @Output() dialogProductNotification: EventEmitter<any> = new EventEmitter();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {id: string},
     @Inject(ProductServiceService) private productService: ProductServiceService,
+    @Inject(CategoryServiceService) private categoryService: CategoryServiceService,
     private toastrService: ToastServiceService,
     private fb: FormBuilder
   ){
@@ -41,25 +63,53 @@ export class CreateProductComponent implements OnInit{
           image: result.image,
           quantity: result.quantity,
           price: result.price,
-          discount: result.discount
+          discount: result.discount,
+          category: result.category
         })
       })
     } 
   }
 
+  selectFile() {
+    this.fileInput.nativeElement.click();
+  }
+
   initForm(): void {
     this.productForm = this.fb.group({
-      id: [null],
+      id: [''],
       name:  ['', Validators.required],
       image:  [''],
       quantity: [0],
       price: [0],
-      discount: [0]
+      discount: [0],
+      category: []
     })
   }
 
   ngOnInit(): void {
-    // TODO document why this method 'ngOnInit' is empty
+    this.filteredSearchInput = this.productForm.get(CATEGORY)!.valueChanges.pipe(
+      startWith(''),
+      map(value => this.searchValue(value || '')),
+    )
+  }
+
+  enterSearchCategory(value: string){
+      this.categoryService.getListCategory(0, 100, ['id', 'name'],this.categoryRequestModel).subscribe((data) => {
+        this.dataCategory = data.data
+      });
+  }
+
+  getOptionText(option: any) {
+    return option.name;
+  }
+
+  private searchValue(value: string): Category[] {
+    const filterValue = this.convertText(value);
+    return this.dataCategory.filter(dataFakeSearch => this.convertText(dataFakeSearch.name).includes(filterValue));
+  }
+
+  private convertText(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
   
 
@@ -78,6 +128,7 @@ export class CreateProductComponent implements OnInit{
     this.productForm.get(QUANTITY)!.setValue(0);
     this.productForm.get(PRICE)!.setValue(0);
     this.productForm.get(DISCOUNT)!.setValue(0);
+    this.productForm.get(CATEGORY)!.setValue('');
   } 
 
   onSubmit(){
@@ -108,5 +159,7 @@ export class CreateProductComponent implements OnInit{
       reader.readAsDataURL(file);
     }
   }
+
+  
 }
 
