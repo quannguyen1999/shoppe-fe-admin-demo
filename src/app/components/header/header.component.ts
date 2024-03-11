@@ -53,6 +53,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  redirectInfoPage(){
+    this.router.navigate(['/info']);
+  }
+
   logout(){
     console.log("clear")
     localStorage.clear();

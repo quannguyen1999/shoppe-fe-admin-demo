@@ -1,0 +1,68 @@
+<div class="w-full h-full m-auto">
+  <app-title-component
+    valueIcon="account_circle"
+    content="Info Account">
+  </app-title-component>
+
+  <form [formGroup]="accountForm" class="m-10">
+    <div class="text-center justify-center">
+      <input accept=".png, .jpg" #fileInput class="mb-4 hidden" type="file" placeholder="Enter..." (change)="onFileSelected($event)">
+      <div class=" relative inline-block image-container">
+        <img src="{{selectedImage != null ? selectedImage : avatar}}" alt="" class="m-auto w-32 shadow-xl rounded-full mb-4 h-32 cursor-pointer"  (click)="selectFile()">
+        <div class="overlay-text cursor-pointer" (click)="selectFile()">Upload Image</div>
+      </div>
+    </div>
+      <mat-form-field class="w-full">
+        <mat-label>UserName</mat-label>
+        <input matInput placeholder="Enter..." formControlName="username" required>
+        @if (accountForm.get('username')!.invalid) {
+          <mat-error >{{getErrorMessage('username')}}</mat-error>
+        }
+      </mat-form-field>
+  
+       <mat-form-field class="w-full">
+        <mat-label>Birthday</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          formControlName="birthday"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        @if (accountForm.get('birthday')!.invalid) {
+          <mat-error >{{getErrorMessage('birthday')}}</mat-error>
+        }
+      </mat-form-field>
+  
+      
+      <mat-label>Gender: </mat-label>
+      <mat-radio-group aria-label="Select an option" formControlName="gender">
+        <mat-radio-button checked="true" value="true">Boy</mat-radio-button>
+        <mat-radio-button value="false">Girl</mat-radio-button>
+        <mat-radio-button value="null">Gay</mat-radio-button>
+      </mat-radio-group>
+   
+      <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter..." formControlName="email" required>
+        @if (accountForm.get('email')!.invalid) {
+          <mat-error >{{getErrorMessage('email')}}</mat-error>
+        }
+      </mat-form-field>
+     
+  
+      <mat-label>Mfa Enabled: </mat-label>
+      <mat-slide-toggle formControlName="mfaEnabled"></mat-slide-toggle>
+  
+      <mat-label>Mfa Registered: </mat-label>
+      <mat-slide-toggle formControlName="mfaRegistered"></mat-slide-toggle>
+      <br>
+
+      <button class="w-full h-10 mt-10 text-xl text-white leading-5 bg-orange-500 hover:bg-orange-700" (click)="onSubmit()">
+            Save
+      </button>
+    </form>
+</div>

@@ -12,6 +12,9 @@
     transition: opacity 0.3s ease;
 }
 
+:host {
+    width: 100%;
+  }
 
 .image-container:hover .overlay-text {
     opacity: 1;

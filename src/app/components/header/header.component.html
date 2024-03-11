@@ -34,7 +34,7 @@
                     <p>{{ formatCurrentDate() }}</p>
                 </span>
             </div>
-            <div class="m-auto ">
+            <!-- <div class="m-auto ">
            
                 <mat-icon  [matMenuTriggerFor]="menuSetting" class="text-white text-xl m-auto cursor-pointer">settings</mat-icon>
                 <mat-menu #menuSetting="matMenu">
@@ -55,35 +55,27 @@
                         </div>
                     </button>
                 </mat-menu>
-            </div>
-            <div class="m-auto ">
+            </div> -->
+            <!-- <div class="m-auto ">
                     <span [matMenuTriggerFor]="menuLanguage"> <mat-icon class=" text-white text-xl m-auto cursor-pointer" badge="2">notifications</mat-icon></span>
                     <mat-menu #menuLanguage="matMenu">
                         <button mat-menu-item>Tiếng Việt</button>
                         <button mat-menu-item>Tiếng Anh</button>
                     </mat-menu>
-            </div>
-            <div class="m-auto ">
+            </div> -->
+            <!-- <div class="m-auto ">
                 <mat-icon class=" text-white text-xl m-auto cursor-pointer">drag_indicator</mat-icon>
-            </div>
+            </div> -->
             <div class="m-auto flex flex-row">
                 <div>
                     <img src="{{avatar}}"  class="w-10 h-8 cursor-pointer rounded-full" alt="" [matMenuTriggerFor]="menuAvatar">
                     <mat-menu #menuAvatar="matMenu">
-                        <button mat-menu-item  class="grid grid-cols-2">
+                        <button mat-menu-item  class="grid grid-cols-2" (click)="redirectInfoPage()">
                             <mat-icon>
                                     perm_identity
                             </mat-icon>
                             <div>
                                 Info
-                            </div>
-                        </button>
-                        <button mat-menu-item  class="grid grid-cols-2" (click)="logout()">
-                            <mat-icon>
-                                exit_to_app
-                            </mat-icon>
-                            <div>
-                                Logout
                             </div>
                         </button>
                     </mat-menu>
@@ -94,6 +86,10 @@
                         Hello Admin
                     </span>
                 </div>
+            </div>
+            <div class="m-auto ">
+                    <span (click)="logout()"> <mat-icon class=" text-white text-xl m-auto cursor-pointer" badge="2">exit_to_app</mat-icon></span>
+    
             </div>
         </div> 
     </div>
