@@ -92,7 +92,6 @@ export class CreateAccountComponent{
 
   onClear(){
     if(this.isEdit){
-      console.log(this.accountFormSave.value)
       this.accountForm.patchValue(this.accountFormSave.value)
     }else{
       this.accountForm.get(USERNAME)!.setValue('');

@@ -59,9 +59,15 @@ import { AuthenticationResolver } from './config/authorization-config.resolver';
 import { ProgressSpinnerComponent } from './components/progress-spinner/progress-spinner.component';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { InfoComponent } from './components/info/info.component';
+import { OrderComponent } from './components/order/order.component';
+import { CampaignComponent } from './components/campaign/campaign.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
+
   declarations: [
+    
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -86,7 +92,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CreateCategoryComponent,
     CreateProductComponent,
     PageErrorComponent,
-    ProgressSpinnerComponent
+    ProgressSpinnerComponent,
+    InfoComponent,
+    OrderComponent,
+    CampaignComponent
   ],
   imports: [
     MatRadioModule,

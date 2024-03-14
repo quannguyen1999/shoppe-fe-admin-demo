@@ -8,6 +8,10 @@ import { ProductsComponent } from './components/products/products.component';
 import { authServiceGuard } from './services/auth-service.guard';
 import { PageErrorComponent } from './components/status/page-error/page-error.component';
 import { AuthenticationResolver } from './config/authorization-config.resolver';
+import { InfoComponent } from './components/info/info.component';
+import { OrderComponent } from './components/order/order.component';
+import { CampaignComponent } from './components/campaign/campaign.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
@@ -39,6 +43,21 @@ const routes: Routes = [
     component: PageNotFoundComponent
   },
   {
+    path: 'info',
+    component: InfoComponent,
+    canActivate: [authServiceGuard]
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
+    canActivate: [authServiceGuard]
+  },
+  {
+    path: 'campaign',
+    component: CampaignComponent,
+    canActivate: [authServiceGuard]
+  },
+  {
     path: '',
     redirectTo: 'home', pathMatch: 'full'
   },
@@ -47,9 +66,15 @@ const routes: Routes = [
     component: PageNotFoundComponent
   }
 ];
+// imports: [
+//   BrowserModule,
+//   RouterModule.forRoot(appRoutes),
+//   FormsModule               
+// ],
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

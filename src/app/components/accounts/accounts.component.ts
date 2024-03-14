@@ -7,6 +7,7 @@ import { AccountServiceService } from '../../services/account-service.service';
 import { DEFAULT_ACCOUNT_COLUMNS } from '../../constants/column-value';
 import { CommonService } from '../../services/common.service';
 import { ToastServiceService } from '../../services/toast-service.service';
+import { Menu } from 'primeng/menu';
 
 @Component({
   selector: 'app-accounts',
@@ -16,6 +17,8 @@ import { ToastServiceService } from '../../services/toast-service.service';
 export class AccountsComponent{
   //SideBar
   @Input() currentTabMenu!: boolean;
+
+  @Input() currentValueMenu!: Menu;
   
   //Field To Search
   accountRequestModel: AccountRequestModel = {

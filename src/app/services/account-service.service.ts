@@ -5,7 +5,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { getAccountDetail } from '../constants/graphql-query-model';
-import { ACCOUNT_CREATE, ACCOUNT_EXPORT, ACCOUNT_PUT } from '../constants/api-value';
+import { ACCOUNT_CREATE, ACCOUNT_EXPORT, ACCOUNT_INFO, ACCOUNT_PUT } from '../constants/api-value';
 import { environment } from '../../environments/environment';
 import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN } from '../constants/constant-value-model';
 import { Router } from '@angular/router';
@@ -116,14 +116,14 @@ export class AccountServiceService {
     })
     .pipe(
       map((response) => response.data.listAccount)
-      // ,
-      // catchError((error) => {
-      //     // Handle errors here
-      //     console.error('Error occurred:', error);
-      //     return throwError('An error occurred. Please try again later.');
-      // })
     );
   }
+
+  getInfo(): Observable<any>{
+    return this.http.get(ACCOUNT_INFO);
+  }
+
+
 
   exportExcel(accountRequestModel: AccountRequestModel): Observable<Blob> {
     let filterFields = accountRequestModel.listFields?.filter(field => field !== 'function');

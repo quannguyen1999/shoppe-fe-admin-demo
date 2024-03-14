@@ -23,7 +23,6 @@ export class LocalStorageCustomService {
     }
     const item = JSON.parse(itemStr?.toString() || '');
     const now = new Date();
-    console.log(now.getTime())
     if (now.getTime() > item.expiry) {
       localStorage.removeItem(key); // Remove item if expired
       return null;

@@ -6,6 +6,8 @@ export const ACCOUNT_PUT: string = environment.apiUrl + 'accounts/put';
 
 export const ACCOUNT_EXPORT: string = environment.apiUrl + 'accounts/export';
 
+export const ACCOUNT_INFO: string = environment.apiUrl + 'accounts/info';
+
 
 export const CATEGORY_CREATE: string = environment.apiUrl + 'categories/create';
 

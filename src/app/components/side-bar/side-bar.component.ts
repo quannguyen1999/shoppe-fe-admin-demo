@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Menu } from '../../models/menu.model';
 import { listMenus } from '../../constants/constant-value-model';
 import { Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
+
+  @Output() currentValue = new EventEmitter<Menu>();
   
   listMenus: Array<Menu> = listMenus;
 
@@ -35,5 +37,7 @@ export class SideBarComponent {
     menu!.isSelected = true;
 
     this.router.navigate([menu?.url]);
+
+    this.currentValue.emit(menu);
   }
 }

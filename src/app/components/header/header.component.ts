@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    console.log("clear")
     localStorage.clear();
     this.accountService.requestLoginPage();
   }
