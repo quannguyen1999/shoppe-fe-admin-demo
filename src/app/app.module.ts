@@ -63,6 +63,7 @@ import { InfoComponent } from './components/info/info.component';
 import { OrderComponent } from './components/order/order.component';
 import { CampaignComponent } from './components/campaign/campaign.component';
 import { RouterModule } from '@angular/router';
+import { CreateOrderComponent } from './components/order/create-order/create-order.component';
 
 @NgModule({
 
@@ -95,7 +96,8 @@ import { RouterModule } from '@angular/router';
     ProgressSpinnerComponent,
     InfoComponent,
     OrderComponent,
-    CampaignComponent
+    CampaignComponent,
+    CreateOrderComponent
   ],
   imports: [
     MatRadioModule,

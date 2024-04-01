@@ -32,6 +32,7 @@ export class CategoryServiceService {
     const filterField = fields?.filter(field => field !== 'function');
     const dynamicFields = filterField ? filterField.join(",") : "";
     query = query.replaceAll('$fields', dynamicFields);
+    console.log("working")
     return this.apollo
     .query<{ listCategory: CommonPageInfo<Category> }>({
       query: gql`${query}`, 

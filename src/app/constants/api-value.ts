@@ -17,3 +17,8 @@ export const CATEGORY_EXPORT: string = environment.apiUrl + 'categories/export';
 export const PRODUCT_CREATE: string = environment.apiUrl + 'products/create';
 
 export const PRODUCT_EXPORT: string = environment.apiUrl + 'products/export';
+
+
+export const ORDER_CREATE: string = environment.apiUrl + 'orders/create';
+
+export const ORDER_EXPORT: string = environment.apiUrl + 'orders/export';

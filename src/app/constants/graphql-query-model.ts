@@ -104,3 +104,33 @@ query ProductDetail(
   }
 }
 `;
+
+//ORDER
+export const getOrderDetail: string = `
+query OrderDetail(
+  $page: Int!,
+  $size: Int!,
+  $id: String,
+  $createFromDate: String,
+  $createToDate: String,
+  $listSorted: [Map]
+  ) {
+  listOrder(
+      orderRequestDto: {
+          id: $id,
+          page: $page,
+          size: $size,
+          createFromDate: $createFromDate,
+          createToDate: $createToDate,
+          listSorted: $listSorted
+      }
+  ) {
+    page,
+    size,
+    total,
+    data{
+      $fields
+    }
+  }
+}
+`;

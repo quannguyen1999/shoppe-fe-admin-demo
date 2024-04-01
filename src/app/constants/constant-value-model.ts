@@ -7,28 +7,28 @@ export const NUMBER_TRY_REQUEST = "number_try_request";
 
 export const listMenus: Array<Menu> = [ {
         id: 1,
-        typeIcon: '/assets/images/icon-account.png',
+        typeIcon: 'account_circle',
         value: 'Manage account',
         isSelected: false,
         url: 'accounts'
     },
     {
         id: 2,
-        typeIcon: '/assets/images/icon-packages.png',
+        typeIcon: 'developer_board',
         value: 'Manage Category',
         isSelected: false,
         url: 'categories'
     },
     {
         id: 3,
-        typeIcon: '/assets/images/icon-product.png',
+        typeIcon: 'devices_other',
         value: 'Manage Product',
         isSelected: true,
         url: 'products'
     },
     {
         id: 4,
-        typeIcon: '/assets/images/icon-order.png',
+        typeIcon: 'shopping_cart',
         value: 'Manage Order',
         isSelected: false,
         url: 'order'
@@ -36,7 +36,7 @@ export const listMenus: Array<Menu> = [ {
     },
     {
         id: 5,
-        typeIcon: '/assets/images/icon-campaign.png',
+        typeIcon: 'redeem',
         value: 'Manage Campaign',
         isSelected: false,
         url: 'campaign'

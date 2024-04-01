@@ -21,6 +21,15 @@
           </td>
         </div>
 
+        <div *ngIf="item == 'image'; else notFunction">
+          <th mat-header-cell *matHeaderCellDef>
+            Image
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <img [src]="element[item]" alt="" class="h-14">
+          </td>
+        </div>
+
         <!-- Another Column -->
         <ng-template #notFunction>
           <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ item }}</th>
